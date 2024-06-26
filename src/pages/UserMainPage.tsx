@@ -5,6 +5,7 @@ import MyProfile from "../components/MyProfile";
 import "./UserMainPage.css";
 import Header1 from "../components/Header1";
 import HeaderTop from "../components/HeaderTop";
+import Header2 from "../components/Header2";
 const UserMainPage: FunctionComponent = () => {
   return (
     <div className="user-main-page">

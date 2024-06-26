@@ -1,13 +1,48 @@
-import { FunctionComponent } from "react";
+import {
+  FunctionComponent,
+  useMemo,
+  type CSSProperties,
+  useCallback,
+} from "react";
 import "./FrameComponent.css";
-
+import { useNavigate } from "react-router-dom";
 export type FrameComponentType = {
   className?: string;
+
+  /** Style props */
+  headerNavigationMargin?: CSSProperties["margin"];
+
+  /** Action props */
+  onNavigationLinksContainerClick?: () => void;
+  onNavigationLinksContainerClick1?: () => void;
 };
 
 const FrameComponent: FunctionComponent<FrameComponentType> = ({
   className = "",
+  headerNavigationMargin,
+  onNavigationLinksContainerClick,
+  onNavigationLinksContainerClick1,
 }) => {
+  const petWorldStyle: CSSProperties = useMemo(() => {
+    return {
+      margin: headerNavigationMargin,
+    };
+  }, [headerNavigationMargin]);
+
+  const navigate = useNavigate();
+
+  const onMyProfileClick = useCallback(() => {
+    navigate("/my-profile-page");
+  }, [navigate]);
+
+  const onCartButtonContainerClick = useCallback(() => {
+    navigate("/cart-view");
+  }, [navigate]);
+
+  const onAboutUsClick = useCallback(() => {
+    navigate("/about-us-page");
+  }, [navigate]);
+
   return (
     <div className={`profile-link-container-parent ${className}`}>
       <div className="profile-link-container">

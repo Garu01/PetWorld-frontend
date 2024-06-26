@@ -40,6 +40,10 @@ const Header2: FunctionComponent<Header2Type> = ({
     navigate("/cart-view");
   }, [navigate]);
 
+  const onAboutUsClick = useCallback(() => {
+    navigate("/about-us-page");
+  }, [navigate]);
+
   return (
     <header className={`header13 ${className}`}>
       <div className="frame1">
@@ -63,10 +67,7 @@ const Header2: FunctionComponent<Header2Type> = ({
           >
             <b className="home13">Home</b>
           </div>
-          <div
-            className="navigation-items1"
-            onClick={onNavigationLinksContainerClick1}
-          >
+          <div className="navigation-items1" onClick={onAboutUsClick}>
             <b className="about-us12">About us</b>
           </div>
           <div className="navigation-items2">

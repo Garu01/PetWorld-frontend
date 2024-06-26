@@ -1,9 +1,19 @@
-import { FunctionComponent, useCallback } from "react";
+import { FunctionComponent, useCallback, useState } from "react";
 import SignIn from "../components/SignIn";
 import { useNavigate } from "react-router-dom";
 import MainHeader from "../components/MainHeader";
 import Header1 from "../components/Header1";
 import "./LoginRegisterPage.css";
+import AuthService from "../services/auth.service";
+type Props = {};
+
+type State = {
+  redirect: string | null;
+  password: string;
+  loading: boolean;
+  message: string;
+  email: string;
+};
 
 const LoginRegisterPage: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -11,8 +21,6 @@ const LoginRegisterPage: FunctionComponent = () => {
   const onCreateAccountButtonClick = useCallback(() => {
     navigate("/create-new-account");
   }, [navigate]);
-
-  
 
   return (
     <div className="login-register-page">
@@ -24,7 +32,7 @@ const LoginRegisterPage: FunctionComponent = () => {
           onClick={onCreateAccountButtonClick}
         >
           <div className="create-account-frame" />
-          <b className="creat-account">CREAT ACCOUNT</b>
+          <b className="creat-account">CREATE ACCOUNT</b>
         </button>
         <div className="create-account-and-container">
           <span className="create-account-and-container1">

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, Component } from "react";
 import {
   Routes,
   Route,
@@ -20,11 +20,15 @@ import MyProfilePage from "./pages/MyProfilePage";
 import PetsDetails from "./pages/PetsDetails";
 import CartView from "./pages/CartView";
 import CheckOut from "./pages/CheckOut";
+import AuthService from "./services/auth.service";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const action = useNavigationType();
   const location = useLocation();
   const pathname = location.pathname;
+
+  const currentUser = AuthService.getCurrentUser()
 
   useEffect(() => {
     if (action !== "POP") {
@@ -136,4 +140,5 @@ function App() {
     </Routes>
   );
 }
+
 export default App;

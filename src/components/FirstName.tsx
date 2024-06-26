@@ -1,5 +1,6 @@
 import { FunctionComponent, useMemo, type CSSProperties } from "react";
 import "./FirstName.css";
+import { Form } from "react-router-dom";
 
 export type FirstNameType = {
   className?: string;
@@ -46,8 +47,8 @@ const FirstName: FunctionComponent<FirstNameType> = ({
           <div className="first-name11" style={firstName1Style}>
             <input
               className="first-name12"
-              placeholder={firstNamePlaceholder}
               type="text"
+              value={firstNamePlaceholder}
               style={firstName2Style}
             />
           </div>
