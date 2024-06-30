@@ -19,6 +19,7 @@ interface Pet {
   date_of_birth: string;
   first_name: string;
   available: string;
+  admin_checked: string;
 }
 
 type PetAvailable = {
@@ -45,7 +46,9 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
         const response = await axios.get<Pet[]>(
           "http://localhost:8080/api/showPet"
         );
-        const response_pet = response.data;
+        const response_pet = response.data.filter(
+          (pet: Pet) => pet.admin_checked.toLowerCase() !== "true"
+        );
 
         if (condition === "lowToHigh" || condition === "highToLow") {
           response_pet.sort((a, b) => {
@@ -157,6 +160,7 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
   };
 
   const handleSubmitAvailable = () => {
+    console.log(availableCheck);
     axios
       .post("http://localhost:8080/api/adminCheck", {
         availableCheck,

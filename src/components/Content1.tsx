@@ -1,17 +1,28 @@
 import { FunctionComponent } from "react";
 import "./Content1.css";
-
+import { useShoppingContext } from "../context/shoppingContext";
 export type Content1Type = {
   className?: string;
-  image?: string;
-  type?: string;
-  title?: string;
-  breed?: string;
-  price?: number;
-  id?: number;
-  color?: string;
-  date_of_birth?: string;
-  first_name?: string;
+  image: string;
+  type: string;
+  title: string;
+  breed: string;
+  price: number;
+  id: number;
+  color: string;
+  date_of_birth: string;
+  first_name: string;
+  user_id: number;
+};
+
+type ProductItem = {
+  id: number;
+  type: string;
+  title: string;
+  breed: string;
+  base64String: string;
+  price: number;
+  user_id: number;
 };
 
 const Content1: FunctionComponent<Content1Type> = ({
@@ -25,7 +36,18 @@ const Content1: FunctionComponent<Content1Type> = ({
   color,
   date_of_birth,
   first_name,
+  user_id,
 }) => {
+  const productItem = {
+    id: id,
+    type: type,
+    title: title,
+    breed: breed,
+    base64String: image,
+    price: price,
+    user_id: user_id,
+  };
+  const { addCartItem } = useShoppingContext();
   return (
     <section className={`content3 ${className}`}>
       <div className="pet-details-header-parent">
@@ -88,7 +110,10 @@ const Content1: FunctionComponent<Content1Type> = ({
                 <b className="owner-location">${price}</b>
               </div>
               <div className="add-to-cart-button-wrapper">
-                <button className="add-to-cart-button">
+                <button
+                  className="add-to-cart-button"
+                  onClick={() => addCartItem(productItem)}
+                >
                   <img
                     className="shopping-cart-2-icon"
                     alt=""

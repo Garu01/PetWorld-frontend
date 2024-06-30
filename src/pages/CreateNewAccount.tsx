@@ -10,8 +10,8 @@ const CreateNewAccount: FunctionComponent = () => {
     <div className="create-new-account">
       <CreateAccount />
       <b className="create-account">Create Account</b>
-      <Header2 />
-      <Header1 />
+      {/* <Header2 />
+      <Header1 /> */}
     </div>
   );
 };

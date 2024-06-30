@@ -30,6 +30,22 @@ const Header2 = () => {
   const onMyAccountClick = useCallback(() => {
     navigate("my-profile-page");
   }, [navigate]);
+
+  const onDogPageClick = useCallback(() => {
+    navigate("/dog-page");
+  }, [navigate]);
+
+  const onCatPageClick = useCallback(() => {
+    navigate("/cat-page");
+  }, [navigate]);
+
+  const onFishPageClick = useCallback(() => {
+    navigate("/fish-page");
+  }, [navigate]);
+
+  const onBirdPageClick = useCallback(() => {
+    navigate("/bird-page");
+  }, [navigate]);
   return (
     <header className="header13">
       <div className="frame1">
@@ -160,6 +176,48 @@ const Header2 = () => {
           </div>
         </div>
       </nav>
+      <div className="header10">
+        <div className="sale">
+          <b className="sale1">SALE</b>
+          <img
+            className="downward-arrow-1-icon"
+            alt=""
+            src="/downwardarrow-1@2x.png"
+          />
+        </div>
+        <div className="dog" onClick={onDogPageClick}>
+          <b className="dog1">DOG</b>
+          <img
+            className="downward-arrow-1-icon1"
+            alt=""
+            src="/downwardarrow-1@2x.png"
+          />
+        </div>
+        <div className="cat" onClick={onCatPageClick}>
+          <b className="cat1">CAT</b>
+          <img
+            className="downward-arrow-2-icon"
+            alt=""
+            src="/downwardarrow-2@2x.png"
+          />
+        </div>
+        <div className="fish" onClick={onFishPageClick}>
+          <b className="fish1">FISH</b>
+          <img
+            className="downward-arrow-3-icon"
+            alt=""
+            src="/downwardarrow-2@2x.png"
+          />
+        </div>
+        <div className="bird" onClick={onBirdPageClick}>
+          <b className="bird1">BIRD</b>
+          <img
+            className="downward-arrow-4-icon"
+            alt=""
+            src="/downwardarrow-1@2x.png"
+          />
+        </div>
+      </div>
     </header>
     // <nav className="navbar navbar-expand-lg navbar-light pink-navbar">
     //   <div className="container-fluid ">

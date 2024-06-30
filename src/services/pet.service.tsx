@@ -25,7 +25,6 @@ class PetService {
     vaccinated: string,
     wormed_flead: string,
     health_checked: string,
-    seller_name: string,
     admin_check: boolean,
     available: boolean
   ) {
@@ -47,7 +46,6 @@ class PetService {
       vaccinated,
       wormed_flead,
       health_checked,
-      seller_name,
       admin_check,
       available,
     });

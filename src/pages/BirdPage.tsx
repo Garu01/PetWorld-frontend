@@ -9,6 +9,7 @@ import AuthService from "../services/auth.service";
 import { Container, Row } from "react-bootstrap";
 import { Buffer } from "buffer";
 import { useShoppingContext } from "../context/shoppingContext";
+import { Link } from "react-router-dom";
 type ProductItem = {
   id: number;
   type: string;
@@ -17,6 +18,7 @@ type ProductItem = {
   base64String: string;
   user_id: number;
   price: number;
+  admin_checked: string;
 };
 const BirdPage: FunctionComponent = () => {
   const { addCartItem } = useShoppingContext();
@@ -81,7 +83,9 @@ const BirdPage: FunctionComponent = () => {
           "http://localhost:8080/api/showPet"
         );
         const response_pet = response.data.filter(
-          (pet: ProductItem) => pet.type.toLowerCase() === "bird"
+          (pet: ProductItem) =>
+            pet.type.toLowerCase() === "bird" &&
+            pet.admin_checked.toLowerCase() === "true"
         );
 
         if (condition === "lowToHigh" || condition === "highToLow") {
@@ -142,7 +146,7 @@ const BirdPage: FunctionComponent = () => {
   };
   return (
     <div className="dog-page">
-      <div className="mb-3" style={{ marginLeft: "100px" }}>
+      <div className="mb-3" style={{ marginLeft: "100px", marginTop: "100px" }}>
         <label htmlFor="sortOrder" className="form-label">
           Sort by Price:
         </label>
@@ -163,14 +167,6 @@ const BirdPage: FunctionComponent = () => {
       <section className="dog-page-inner">
         <div className="frame-parent">
           <div className="dog-parent">
-            {/* {pets.map((pet) => (
-              <PetCard
-                breed={pet.breed}
-                image={pet.base64String}
-                price={pet.price}
-                id={pet.id}
-              />
-            ))} */}
             {pets.map((pet) => {
               return (
                 <div key={pet.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
@@ -190,6 +186,13 @@ const BirdPage: FunctionComponent = () => {
                       >
                         <i className="fas fa-shopping-cart"></i>Add to Cart
                       </a>
+                      <Link
+                        to={`/products/${pet.id}`}
+                        style={{ marginLeft: "100px" }}
+                      >
+                        {" "}
+                        Detail
+                      </Link>
                     </div>
                   </div>
                 </div>

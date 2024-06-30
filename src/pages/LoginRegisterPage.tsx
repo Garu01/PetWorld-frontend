@@ -52,8 +52,8 @@ const LoginRegisterPage: FunctionComponent = () => {
         </div>
       </div>
       <b className="sign-in">Sign In</b>
-      <MainHeader />
-      <Header1 />
+      {/* <MainHeader />
+      <Header1 /> */}
     </div>
   );
 };

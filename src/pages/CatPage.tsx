@@ -10,6 +10,7 @@ import { Container, Row } from "react-bootstrap";
 import { Buffer } from "buffer";
 import PetCard from "../components/PetCard";
 import { useShoppingContext } from "../context/shoppingContext";
+import { Link } from "react-router-dom";
 type ProductItem = {
   id: number;
   type: string;
@@ -18,6 +19,7 @@ type ProductItem = {
   base64String: string;
   user_id: number;
   price: number;
+  admin_checked: string;
 };
 const CatPage: FunctionComponent = () => {
   const { addCartItem } = useShoppingContext();
@@ -82,7 +84,9 @@ const CatPage: FunctionComponent = () => {
           "http://localhost:8080/api/showPet"
         );
         const response_pet = response.data.filter(
-          (pet: ProductItem) => pet.type.toLowerCase() === "cat"
+          (pet: ProductItem) =>
+            pet.type.toLowerCase() === "cat" &&
+            pet.admin_checked.toLowerCase() === "true"
         );
 
         if (condition === "lowToHigh" || condition === "highToLow") {
@@ -143,7 +147,7 @@ const CatPage: FunctionComponent = () => {
   };
   return (
     <div className="dog-page">
-      <div className="mb-3" style={{ marginLeft: "100px" }}>
+      <div className="mb-3" style={{ marginLeft: "100px", marginTop: "100px" }}>
         <label htmlFor="sortOrder" className="form-label">
           Sort by Price:
         </label>
@@ -183,6 +187,13 @@ const CatPage: FunctionComponent = () => {
                       >
                         <i className="fas fa-shopping-cart"></i>Add to Cart
                       </a>
+                      <Link
+                        to={`/products/${pet.id}`}
+                        style={{ marginLeft: "100px" }}
+                      >
+                        {" "}
+                        Detail
+                      </Link>
                     </div>
                   </div>
                 </div>

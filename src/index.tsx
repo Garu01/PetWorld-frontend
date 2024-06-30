@@ -11,7 +11,8 @@ import {
 } from "@mui/material";
 import { ShoppingContextProvider } from "./context/shoppingContext";
 import "./global.css";
-
+import Header2 from "./components/Header2";
+import Header1 from "./components/Header1";
 const muiTheme = createTheme();
 
 const container = document.getElementById("root");
@@ -23,6 +24,8 @@ root.render(
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={muiTheme}>
           <CssBaseline />
+          <Header2 />
+          <Header1 />
           <App />
         </ThemeProvider>
       </StyledEngineProvider>

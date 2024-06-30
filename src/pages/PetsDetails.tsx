@@ -130,18 +130,21 @@ const PetsDetails: FunctionComponent = () => {
           </div>
         </div>
       </header> */}
-      <HeaderTop />
-      <Content1
-        image={pet?.base64String}
-        type={pet?.type}
-        breed={pet?.breed}
-        title={pet?.title}
-        price={pet?.price}
-        id={pet?.id}
-        color={pet?.color}
-        date_of_birth={pet?.date_of_birth}
-        first_name={pet?.first_name}
-      />
+      {/* <HeaderTop /> */}
+      {pet && (
+        <Content1
+          image={pet.base64String}
+          type={pet.type}
+          breed={pet.breed}
+          title={pet.title}
+          price={pet.price}
+          id={pet.id}
+          color={pet.color}
+          date_of_birth={pet.date_of_birth}
+          first_name={pet.first_name}
+          user_id={pet.user_id}
+        />
+      )}
     </div>
     // <div className="pets-details">
     //   <PetCard

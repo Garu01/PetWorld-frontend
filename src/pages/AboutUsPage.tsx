@@ -17,7 +17,7 @@ const AboutUsPage: FunctionComponent = () => {
 
   return (
     <div className="about-us-page">
-      <Header2 />
+      {/* <Header2 /> */}
       <Content />
     </div>
   );

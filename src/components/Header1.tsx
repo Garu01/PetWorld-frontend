@@ -7,11 +7,11 @@ import {
 import "./Header1.css";
 import { useNavigate } from "react-router-dom";
 
-export type Header1Type = {
-  className?: string;
-};
+// export type Header1Type = {
+//   className?: string;
+// };
 
-const Header1: FunctionComponent<Header1Type> = ({ className = "" }) => {
+const Header1: FunctionComponent = () => {
   const navigate = useNavigate();
 
   const onDogPageClick = useCallback(() => {
@@ -31,7 +31,7 @@ const Header1: FunctionComponent<Header1Type> = ({ className = "" }) => {
   }, [navigate]);
 
   return (
-    <div className={`header10 ${className}`}>
+    <div className="header10">
       <div className="sale">
         <b className="sale1">SALE</b>
         <img

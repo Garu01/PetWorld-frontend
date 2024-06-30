@@ -30,6 +30,7 @@ import { Switch } from "@mui/material";
 import Header2 from "./components/Header2";
 import IUser from "./types/user.type";
 import ProtectedRoute from "./components/ProtectedRoutes";
+import Header1 from "./components/Header1";
 type State = {
   isAdmin: boolean;
   User: IUser | undefined;
@@ -135,19 +136,17 @@ function App() {
   }, [pathname]);
 
   return (
-    <>
-      <Header2 />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/homepage" element={<HomePage />} />
-        <Route path="/login-register-page" element={<LoginRegisterPage />} />
-        <Route path="/create-new-account" element={<CreateNewAccount />} />
-        <Route path="/user-main-page" element={<UserMainPage />} />
-        <Route
-          path="/staff-ui-for-confirm-seller-pets"
-          element={<StaffUIForConfirmSellerPe />}
-        />
-        {/* <Route
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/homepage" element={<HomePage />} />
+      <Route path="/login-register-page" element={<LoginRegisterPage />} />
+      <Route path="/create-new-account" element={<CreateNewAccount />} />
+      <Route path="/user-main-page" element={<UserMainPage />} />
+      <Route
+        path="/staff-ui-for-confirm-seller-pets"
+        element={<StaffUIForConfirmSellerPe />}
+      />
+      {/* <Route
           path="/staff-ui-for-confirm-seller-pets"
           element={
             <ProtectedRoute
@@ -159,29 +158,28 @@ function App() {
             </ProtectedRoute>
           }
         /> */}
-        <Route element={user.isAdmin}>
-          <Route
-            path="/staff-ui-for-confirm-seller-pets"
-            element={<StaffUIForConfirmSellerPe />}
-          />
-        </Route>
-        <Route path="/ui-for-staff" element={<UIForStaff />} />
-        <Route path="/dog-page" element={<DogPage />} />
-        <Route path="/cat-page" element={<CatPage />} />
-        <Route path="/fish-page" element={<FishPage />} />
-        <Route path="/bird-page" element={<BirdPage />} />
-        <Route path="/about-us-page" element={<AboutUsPage />} />
-        <Route path="/upload-pets" element={<UploadPets />} />
-        <Route path="/payment-method" element={<PaymentMethod />} />
-        <Route path="/my-profile-page" element={<MyProfilePage />} />
-        <Route path="/pets-details" element={<PetsDetails />} />
-        <Route path="/cart-view" element={<CartView />} />
-        <Route path="/check-out" element={<CheckOut />} />
-        <Route path="/test" element={<FirebaseImageUpload />} />
-        <Route path="/products/:productId" element={<PetsDetails />} />
-        <Route path="/manage-pets" element={<ManagingPets />} />
-      </Routes>
-    </>
+      <Route element={user.isAdmin}>
+        <Route
+          path="/staff-ui-for-confirm-seller-pets"
+          element={<StaffUIForConfirmSellerPe />}
+        />
+      </Route>
+      <Route path="/ui-for-staff" element={<UIForStaff />} />
+      <Route path="/dog-page" element={<DogPage />} />
+      <Route path="/cat-page" element={<CatPage />} />
+      <Route path="/fish-page" element={<FishPage />} />
+      <Route path="/bird-page" element={<BirdPage />} />
+      <Route path="/about-us-page" element={<AboutUsPage />} />
+      <Route path="/upload-pets" element={<UploadPets />} />
+      <Route path="/payment-method" element={<PaymentMethod />} />
+      <Route path="/my-profile-page" element={<MyProfilePage />} />
+      <Route path="/pets-details" element={<PetsDetails />} />
+      <Route path="/cart-view" element={<CartView />} />
+      <Route path="/check-out" element={<CheckOut />} />
+      <Route path="/test" element={<FirebaseImageUpload />} />
+      <Route path="/products/:productId" element={<PetsDetails />} />
+      <Route path="/manage-pets" element={<ManagingPets />} />
+    </Routes>
   );
 }
 

@@ -180,7 +180,7 @@ const MyProfilePage: FunctionComponent = () => {
 
   return (
     <div>
-      <Header2 />
+      {/* <Header2 /> */}
       <main className="user-dropdown-group">
         <div className="user-dropdown">
           <div className="dropdown-items">

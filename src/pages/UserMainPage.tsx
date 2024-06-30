@@ -9,7 +9,6 @@ import Header2 from "../components/Header2";
 const UserMainPage: FunctionComponent = () => {
   return (
     <div className="user-main-page">
-      <HeaderTop />
       <section className="user-info-parent">
         <div className="user-info1">
           <UserRow userRowPadding="0px var(--padding-7xs) 0px var(--padding-8xs)" />

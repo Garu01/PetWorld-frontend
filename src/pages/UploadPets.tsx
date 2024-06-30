@@ -43,7 +43,6 @@ const UploadPets: FunctionComponent = () => {
     vaccinated: "",
     wormed_flead: "",
     health_checked: "",
-    seller_name: "",
     admin_check: false,
     available: false,
   };
@@ -67,7 +66,6 @@ const UploadPets: FunctionComponent = () => {
     vaccinated: string;
     wormed_flead: string;
     health_checked: string;
-    seller_name: string;
     admin_check: boolean;
     available: boolean;
   }) => {
@@ -89,7 +87,6 @@ const UploadPets: FunctionComponent = () => {
       vaccinated,
       wormed_flead,
       health_checked,
-      seller_name,
       admin_check,
       available,
     } = formValue;
@@ -123,7 +120,6 @@ const UploadPets: FunctionComponent = () => {
       vaccinated,
       wormed_flead,
       health_checked,
-      seller_name,
       admin_check,
       available
     ).then(
@@ -203,7 +199,7 @@ const UploadPets: FunctionComponent = () => {
 
   return (
     <div className="upload-pets">
-      <HeaderTop />
+      {/* <HeaderTop /> */}
       <main className="user-dropdown-group">
         <div className="user-dropdown">
           <div className="dropdown-items">
@@ -319,19 +315,6 @@ const UploadPets: FunctionComponent = () => {
                       type="text"
                       className="form-control"
                       placeholder="Price"
-                    />
-                  </div>
-
-                  <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px" }}
-                  >
-                    <label htmlFor="seller_name">Seller Name </label>
-                    <Field
-                      name="seller_name"
-                      type="text"
-                      className="form-control"
-                      placeholder="Seller Name"
                     />
                   </div>
 
@@ -510,11 +493,11 @@ const UploadPets: FunctionComponent = () => {
                     <div id="my-radio-group">Wormed flead</div>
                     <div role="group" aria-labelledby="my-radio-group">
                       <label>
-                        <input type="radio" name="wormed_flead" value="true" />
+                        <Field type="radio" name="wormed_flead" value="true" />
                         Yes
                       </label>
                       <label>
-                        <input type="radio" name="wormed_flead" value="false" />
+                        <Field type="radio" name="wormed_flead" value="false" />
                         No
                       </label>
                     </div>
@@ -556,7 +539,7 @@ const UploadPets: FunctionComponent = () => {
               {message && (
                 <div
                   className="form-group"
-                  style={{ marginLeft: "200px", marginTop: "15px" }}
+                  style={{ marginLeft: "200px", marginTop: "100px" }}
                 >
                   <div
                     className={

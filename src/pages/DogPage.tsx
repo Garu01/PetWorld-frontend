@@ -1,4 +1,10 @@
-import { FunctionComponent, useEffect, useState, ChangeEvent } from "react";
+import {
+  FunctionComponent,
+  useEffect,
+  useState,
+  ChangeEvent,
+  useCallback,
+} from "react";
 import Header2 from "../components/Header2";
 import FrameComponent1 from "../components/FrameComponent1";
 import Dog from "../components/Dog";
@@ -10,6 +16,7 @@ import { Container, Row } from "react-bootstrap";
 import { Buffer } from "buffer";
 import PetCard from "../components/PetCard";
 import { useShoppingContext } from "../context/shoppingContext";
+import { useNavigate, Link } from "react-router-dom";
 
 type ProductItem = {
   id: number;
@@ -19,6 +26,7 @@ type ProductItem = {
   base64String: string;
   user_id: number;
   price: number;
+  admin_checked: string;
 };
 
 // type Pet = {
@@ -90,7 +98,9 @@ const DogPage: FunctionComponent = () => {
           "http://localhost:8080/api/showPet"
         );
         const response_pet = response.data.filter(
-          (pet: ProductItem) => pet.type.toLowerCase() === "dog"
+          (pet: ProductItem) =>
+            pet.type.toLowerCase() === "dog" &&
+            pet.admin_checked.toLowerCase() === "true"
         );
 
         if (condition === "lowToHigh" || condition === "highToLow") {
@@ -145,13 +155,18 @@ const DogPage: FunctionComponent = () => {
     }
   };
 
+  // const navigate = useNavigate();
+  // const handleViewDetail = useCallback(()=>{
+  //   navigate("/")
+  // })
+
   const handleConditionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCondition(e.target.value);
     console.log(condition);
   };
   return (
     <div className="dog-page">
-      <div className="mb-3" style={{ marginLeft: "100px" }}>
+      <div className="mb-3" style={{ marginLeft: "100px", marginTop: "100px" }}>
         <label htmlFor="sortOrder" className="form-label">
           Sort by Price:
         </label>
@@ -172,14 +187,6 @@ const DogPage: FunctionComponent = () => {
       <section className="dog-page-inner">
         <div className="frame-parent">
           <div className="dog-parent">
-            {/* {pets.map((pet) => (
-              <PetCard
-                breed={pet.breed}
-                image={pet.base64String}
-                price={pet.price}
-                id={pet.id}
-              />
-            ))} */}
             {pets.map((pet) => {
               return (
                 <div key={pet.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
@@ -199,6 +206,13 @@ const DogPage: FunctionComponent = () => {
                       >
                         <i className="fas fa-shopping-cart"></i>Add to Cart
                       </a>
+                      <Link
+                        to={`/products/${pet.id}`}
+                        style={{ marginLeft: "100px" }}
+                      >
+                        {" "}
+                        Detail
+                      </Link>
                     </div>
                   </div>
                 </div>
