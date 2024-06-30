@@ -1,0 +1,302 @@
+import { FunctionComponent } from "react";
+import UserRow from "../components/UserRow";
+import FrameComponent2 from "../components/FrameComponent2";
+import "./PaymentMethod.css";
+
+const PaymentMethod: FunctionComponent = () => {
+  return (
+    <div className="payment-method">
+      <header className="header4">
+        <div className="pawprint-1-wrapper1">
+          <img
+            className="pawprint-1-icon4"
+            loading="lazy"
+            alt=""
+            src="/pawprint-1@2x.png"
+          />
+        </div>
+        <div className="header-inner2">
+          <div className="frame-group">
+            <div className="petworld-container">
+              <h1 className="petworld4">PetWorld</h1>
+            </div>
+            <h3 className="home4">Home</h3>
+          </div>
+        </div>
+        <div className="about-us-wrapper1">
+          <h3 className="about-us4">About us</h3>
+        </div>
+        <div className="service-wrapper1">
+          <h3 className="service4">Service</h3>
+        </div>
+        <div className="search-box-container">
+          <div className="search-box4">
+            <input
+              className="im-searching-for2"
+              placeholder="Im searching for?"
+              type="text"
+            />
+          </div>
+        </div>
+        <div className="search-container">
+          <div className="search4">
+            <img
+              className="icon-search4"
+              loading="lazy"
+              alt=""
+              src="/icon-search@2x.png"
+            />
+          </div>
+        </div>
+        <div className="header-inner3">
+          <div className="frame-container">
+            <div className="image-1-wrapper">
+              <img
+                className="image-1-icon4"
+                loading="lazy"
+                alt=""
+                src="/image-1@2x.png"
+              />
+            </div>
+            <b className="my-account4">My Account</b>
+          </div>
+        </div>
+        <div className="shopping-cart-1-parent1">
+          <img
+            className="shopping-cart-1-icon4"
+            loading="lazy"
+            alt=""
+            src="/shoppingcart-1@2x.png"
+          />
+          <div className="cart-frame">
+            <b className="cart4">Cart</b>
+          </div>
+        </div>
+      </header>
+      <main className="frame-main">
+        <div className="frame-parent1">
+          <UserRow userRowPadding="0px var(--padding-base) 0px var(--padding-lg)" />
+          <FrameComponent2 />
+        </div>
+        <section className="frame-wrapper">
+          <div className="frame-parent2">
+            <div className="payment-method-wrapper">
+              <h1 className="payment-method1">Payment Method</h1>
+            </div>
+            <div className="information">
+              <div className="frame-parent3">
+                <div className="frame-parent4">
+                  <div className="first-name-wrapper">
+                    <div className="first-name">Credit Card number</div>
+                  </div>
+                  <div className="frame-parent5">
+                    <div className="required-wrapper">
+                      <div className="required">REQUIRED</div>
+                    </div>
+                    <div className="last-name-input">
+                      <div className="last-name">Expiration</div>
+                      <div className="last-name1">Expiration</div>
+                    </div>
+                  </div>
+                  <div className="required-container">
+                    <div className="required1">REQUIRED</div>
+                  </div>
+                </div>
+                <div className="frame-parent6">
+                  <div className="frame-wrapper1">
+                    <div className="frame-parent7">
+                      <div className="first-name-container">
+                        <div className="first-name1">
+                          <input
+                            className="first-name2"
+                            placeholder="Credit Card number"
+                            type="text"
+                          />
+                        </div>
+                      </div>
+                      <div className="last-name2">
+                        <input
+                          className="first-name3"
+                          placeholder="Expiration"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="frame-parent8">
+                    <div className="last-name-wrapper">
+                      <div className="last-name3">Name on card</div>
+                    </div>
+                    <div className="required-parent">
+                      <div className="required2">REQUIRED</div>
+                      <div className="last-name4">CVV</div>
+                    </div>
+                    <div className="required3">REQUIRED</div>
+                  </div>
+                </div>
+                <div className="name-input-fields">
+                  <div className="last-name-input1">
+                    <div className="last-name5">
+                      <input
+                        className="last-name6"
+                        placeholder="Name on card"
+                        type="text"
+                      />
+                    </div>
+                    <div className="last-name7">
+                      <input
+                        className="last-name8"
+                        placeholder="CVV"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="address-container">
+                <div className="address-fields">
+                  <h1 className="billing-address">Billing Address</h1>
+                  <div className="last-name-parent">
+                    <div className="last-name9">First name</div>
+                    <div className="required-group">
+                      <div className="required4">REQUIRED</div>
+                      <div className="last-name10">Last name</div>
+                    </div>
+                    <div className="required5">REQUIRED</div>
+                  </div>
+                  <div className="address-input">
+                    <div className="short-address-input">
+                      <div className="last-name11">Address</div>
+                    </div>
+                    <div className="required6">REQUIRED</div>
+                  </div>
+                  <div className="last-name-group">
+                    <div className="last-name12">
+                      <input
+                        className="last-name13"
+                        placeholder="State/Province"
+                        type="text"
+                      />
+                    </div>
+                    <div className="last-name14">
+                      <input
+                        className="last-name15"
+                        placeholder="Postcode"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div className="split-address-input">
+                    <div className="double-address-input">
+                      <div className="last-name16">Company name</div>
+                      <div className="nested-address-input">
+                        <div className="last-name17">
+                          <input
+                            className="last-name18"
+                            placeholder="Company name"
+                            type="text"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="double-address-input1">
+                      <div className="last-name19">Phone number</div>
+                      <div className="last-name-container">
+                        <div className="last-name20">
+                          <input
+                            className="last-name21"
+                            placeholder="Phone number"
+                            type="text"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="last-name-parent1">
+                    <div className="last-name22">
+                      <input
+                        className="last-name23"
+                        placeholder="First name"
+                        type="text"
+                      />
+                    </div>
+                    <div className="last-name24">
+                      <input
+                        className="last-name25"
+                        placeholder="Last name"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div className="last-name26">
+                    <input
+                      className="last-name27"
+                      placeholder="Address"
+                      type="text"
+                    />
+                  </div>
+                  <div className="detailed-address-input">
+                    <div className="specific-address-input">
+                      <div className="last-name28">City</div>
+                    </div>
+                    <div className="address-requirement">
+                      <div className="address-validation">
+                        <div className="required7">REQUIRED</div>
+                        <div className="last-name29">Country</div>
+                      </div>
+                    </div>
+                    <div className="required8">REQUIRED</div>
+                  </div>
+                  <div className="nested-address-entry">
+                    <div className="last-name30">
+                      <input
+                        className="last-name31"
+                        placeholder="City"
+                        type="text"
+                      />
+                    </div>
+                    <div className="sub-address-entry">
+                      <div className="last-name32">
+                        <input
+                          className="last-name33"
+                          placeholder="Country"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="last-name-parent2">
+                    <div className="last-name34">State/Province</div>
+                    <div className="required-parent1">
+                      <div className="required9">REQUIRED</div>
+                      <div className="last-name35">Postcode</div>
+                    </div>
+                    <div className="required10">REQUIRED</div>
+                  </div>
+                </div>
+                <div className="button-container">
+                  <div className="create-account-button-parent">
+                    <div className="create-account-button2">
+                      <div className="login-frame4">
+                        <b className="save-payment-method">
+                          SAVE PAYMENT METHOD
+                        </b>
+                      </div>
+                    </div>
+                    <div className="create-account-button3">
+                      <div className="login-frame5">
+                        <b className="cancel">CANCEL</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+};
+
+export default PaymentMethod;
