@@ -5,7 +5,6 @@ import Header1 from "../components/Header1";
 import "./CreateNewAccount.css";
 import HeaderTop from "../components/HeaderTop";
 import Header2 from "../components/Header2";
-
 const CreateNewAccount: FunctionComponent = () => {
   return (
     <div className="create-new-account">

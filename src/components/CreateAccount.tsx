@@ -30,7 +30,6 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
-  // initialize value
   const initialValues = {
     email: "",
     password: "",
@@ -45,7 +44,6 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
     postcode: "",
   };
 
-  // condition for email and password
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("This is not a valid email.")
@@ -60,7 +58,6 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
       .required("This field is required!"),
   });
 
-  // function for get value and post to serveri
   const handleRegister = (formValue: {
     email: string;
     password: string;
