@@ -49,6 +49,10 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
     AuthService.logout();
   }, [navigate]);
 
+  const onUploadPetClick = useCallback(() => {
+    navigate("/upload-pets");
+  }, [navigate]);
+
   return (
     <div className={`profile-link-container-parent ${className}`}>
       <div className="profile-link-container">
@@ -86,13 +90,15 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
           <div className="frame-parent11">
             <div className="location-1-wrapper">
               <img
-                className="location-1-icon"
+                className="pawprint-2-icon"
                 loading="lazy"
                 alt=""
-                src="/location-1@2x.png"
+                src="/pawprint-2@2x.png"
               />
             </div>
-            <div className="addresses">Addresses</div>
+            <div className="addresses" onClick={onUploadPetClick}>
+              Upload Pets
+            </div>
           </div>
         </div>
         <div className="payment-pets">

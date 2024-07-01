@@ -21,6 +21,11 @@ interface User {
   country: string;
 }
 
+type Item = {
+  id: number;
+  qty: number;
+  user_id: number;
+};
 const CheckOut: FunctionComponent = () => {
   const [users, setUsers] = useState<User>();
   const [error, setError] = useState("");
@@ -78,10 +83,15 @@ const CheckOut: FunctionComponent = () => {
 
   const handlePlaceOrder = () => {
     const currentShoppingCart = authService.getCurrentShoppingCart();
-
+    const extractedData = currentShoppingCart.map((item: Item) => ({
+      id: item.id,
+      qty: item.qty,
+      user_id: item.user_id,
+    }));
+    console.log(extractedData);
     axios
       .post("http://localhost:8080/api/transaction", {
-        currentShoppingCart,
+        extractedData,
       })
       .then(
         (response) => {
@@ -273,7 +283,10 @@ const CheckOut: FunctionComponent = () => {
         </div>
       )}
       {message && (
-        <div className="form-group">
+        <div
+          className="form-group"
+          style={{ marginTop: "100px", marginLeft: "400px" }}
+        >
           <div
             className={
               successful ? "alert alert-success" : "alert alert-danger"

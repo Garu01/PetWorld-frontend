@@ -335,3 +335,12 @@
     box-sizing: border-box;
   }
 }
+.btn-custom {
+  background-color: #d891c3; /* Background color */
+  border: 1px solid black;   /* Black border */
+  color: black;              /* Black text color */
+  font-weight: bold;         /* Bold text */
+  padding: 10px 20px;        /* Padding to increase the button size */
+  text-align: center;        /* Center-align text */
+  display: inline-block;     /* Display as inline-block */
+}

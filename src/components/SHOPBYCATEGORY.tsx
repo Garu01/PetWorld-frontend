@@ -11,7 +11,7 @@ const SHOPBYCATEGORY: FunctionComponent<SHOPBYCATEGORYType> = ({
   return (
     <div className={`shop-by-category ${className}`}>
       <div className="popular-pet-products">
-        <img className="pawprint-2-icon1" alt="" src="/pawprint-21@2x.png" />
+        {/* <img className="pawprint-2-icon1" alt="" src="/pawprint-21@2x.png" /> */}
         <div className="popular-pet-products1">Popular pet products</div>
       </div>
       <div className="shop-by-category1">
@@ -39,10 +39,18 @@ const SHOPBYCATEGORY: FunctionComponent<SHOPBYCATEGORYType> = ({
           />
         </div>
       </div>
-      <div className="shop-by-category-child" />
-      <div className="shop-by-category-item" />
-      <div className="shop-by-category-inner" />
-      <div className="shop-by-category-child1" />
+      <div className="shop-by-category-child">
+        <img src="/shiba.jpg" />
+      </div>
+      <div className="shop-by-category-item">
+        <img src="/fish.png" />
+      </div>
+      <div className="shop-by-category-inner">
+        <img src="/cat.png" />
+      </div>
+      <div className="shop-by-category-child1">
+        <img src="/eagle.jpg" />
+      </div>
     </div>
   );
 };

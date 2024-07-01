@@ -58,8 +58,8 @@ const Content1: FunctionComponent<Content1Type> = ({
           <div className="create-account4">
             <div className="pet-overview">
               <div className="pug-parent">
-                <h1 className="pug">{type}</h1>
-                <div className="listing-id-peptdyztjt">{id}</div>
+                <h1 className="pug">{title}</h1>
+                <div className="listing-id-peptdyztjt">Pet id :{id}</div>
               </div>
             </div>
             <div className="separator">
@@ -81,20 +81,15 @@ const Content1: FunctionComponent<Content1Type> = ({
                     <div className="pet-color-mix-colours-adverti-wrapper">
                       <div className="pet-color-mix-container">
                         <p className="pet-color-mix">Pet color: {color}</p>
-                        <p className="advertiser-individual">
+                        {/* <p className="advertiser-individual">
                           Advertiser: Individual
                         </p>
                         <p className="seller-id-at13">Seller ID: #AT13</p>
                         <p className="pets-in-litter">
                           Pets in Litter: 3 Male / 3 Female
-                        </p>
-                        {/* <p className="age-01-year">
-                          Age: 01 Year 04 Month(s) 27 Day(s)
                         </p> */}
+
                         <p className="dob-07-01-2023">DOB:{date_of_birth}</p>
-                        {/* <p className="ready-to-leave">
-                          Ready To Leave: 07-07-2024
-                        </p> */}
                       </div>
                     </div>
                     <div className="description">Description</div>
@@ -106,7 +101,7 @@ const Content1: FunctionComponent<Content1Type> = ({
           <div className="owner-info">
             <div className="owner-details">
               <div className="jack-w-parent">
-                <div className="jack-w">{first_name}</div>
+                <div className="jack-w">Seller Name : {first_name}</div>
                 <b className="owner-location">${price}</b>
               </div>
               <div className="add-to-cart-button-wrapper">

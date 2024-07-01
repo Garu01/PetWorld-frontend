@@ -121,13 +121,6 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
 
   return (
     <div className={`create-account1 ${className}`}>
-      {/* <div className="create-account-button4">
-        <div className="login-frame11" />
-        <button className="create-account2" type="submit">
-          CREATE ACCOUNT
-        </button>
-      </div> */}
-
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -377,7 +370,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
                 className="form-group col-md-6"
                 style={{ marginLeft: "400px" }}
               >
-                <label htmlFor="email"> </label>
+                <label htmlFor="email">Email </label>
                 <Field
                   name="email"
                   type="email"
@@ -395,20 +388,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
                 className="form-group col-md-6"
                 style={{ marginLeft: "400px" }}
               >
-                <label htmlFor="address_line1"></label>
-                <Field
-                  name="address_line1"
-                  type="text"
-                  className="form-control"
-                  placeholder="Address Line 1"
-                />
-              </div>
-
-              <div
-                className="form-group col-md-6"
-                style={{ marginLeft: "400px" }}
-              >
-                <label htmlFor="password"> </label>
+                <label htmlFor="password">Password </label>
                 <Field
                   name="password"
                   type="password"
@@ -440,7 +420,20 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
                 className="form-group col-md-6"
                 style={{ marginLeft: "400px" }}
               >
-                <label htmlFor="address_line2"> </label>
+                <label htmlFor="address_line1">Address Line 1</label>
+                <Field
+                  name="address_line1"
+                  type="text"
+                  className="form-control"
+                  placeholder="Address Line 1"
+                />
+              </div>
+
+              <div
+                className="form-group col-md-6"
+                style={{ marginLeft: "400px" }}
+              >
+                <label htmlFor="address_line2">Address Line 2 </label>
                 <Field
                   name="address_line2"
                   type="text"
@@ -453,7 +446,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
                 className="form-group col-md-6"
                 style={{ marginLeft: "400px" }}
               >
-                <label htmlFor="first_name"> </label>
+                <label htmlFor="first_name">First Name </label>
                 <Field
                   name="first_name"
                   type="text"
@@ -466,7 +459,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
                 className="form-group col-md-6"
                 style={{ marginLeft: "400px" }}
               >
-                <label htmlFor="last_name"> </label>
+                <label htmlFor="last_name">Last Name </label>
                 <Field
                   name="last_name"
                   type="text"
@@ -479,7 +472,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
                 className="form-group col-md-6"
                 style={{ marginLeft: "400px" }}
               >
-                <label htmlFor="phone_number"> </label>
+                <label htmlFor="phone_number">Phone Number </label>
                 <Field
                   name="phone_number"
                   type="text"
@@ -492,7 +485,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
                 className="form-group col-md-6"
                 style={{ marginLeft: "400px" }}
               >
-                <label htmlFor="city"> </label>
+                <label htmlFor="city">City </label>
                 <Field
                   name="city"
                   type="text"
@@ -505,7 +498,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
                 className="form-group col-md-6"
                 style={{ marginLeft: "400px" }}
               >
-                <label htmlFor="state_province"> </label>
+                <label htmlFor="state_province">State / Province </label>
                 <Field
                   name="state_province"
                   type="text"
@@ -518,7 +511,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
                 className="form-group col-md-6"
                 style={{ marginLeft: "400px" }}
               >
-                <label htmlFor="country"> </label>
+                <label htmlFor="country">Country </label>
                 <Field
                   name="country"
                   type="text"
@@ -531,7 +524,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
                 className="form-group col-md-6"
                 style={{ marginLeft: "400px" }}
               >
-                <label htmlFor="postcode"> </label>
+                <label htmlFor="postcode">Postcode </label>
                 <Field
                   name="postcode"
                   type="text"
@@ -540,7 +533,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
                 />
               </div>
 
-              <button type="submit" className="btn btn-dark btn-block">
+              <button type="submit" className="btn btn-custom  btn-block">
                 Create Account
               </button>
             </div>

@@ -25,8 +25,8 @@ class PetService {
     vaccinated: string,
     wormed_flead: string,
     health_checked: string,
-    admin_check: boolean,
-    available: boolean
+    admin_check: string,
+    available: string
   ) {
     return axios.post(API_URL + "pets", {
       user_id,

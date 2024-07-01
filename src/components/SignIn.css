@@ -109,3 +109,11 @@
   color: var(--color-darkslategray);
   font-family: var(--font-inter);
 }
+
+.btn-custom {
+  background-color: #d891c3;
+  border: 1px solid black;
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+}

@@ -39,6 +39,7 @@ const MyProfilePage: FunctionComponent = () => {
   const [error, setError] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
+  const [userEmail, setUserEmail] = useState("");
 
   const updateUserField = (field: keyof User, value: any) => {
     if (users) {
@@ -159,12 +160,12 @@ const MyProfilePage: FunctionComponent = () => {
         }
 
         const parsedUserData = JSON.parse(storedUserData);
-        if (!parsedUserData || !parsedUserData.email) {
+        if (!parsedUserData || !parsedUserData.id) {
           setError("Stored user data is invalid");
           return;
         }
 
-        const storedEmail = parsedUserData.email;
+        const storedEmail = parsedUserData.id;
 
         // Fetch users from the database
         const response = await axios.get("http://localhost:8080/users"); // Replace with your actual API endpoint
@@ -172,10 +173,11 @@ const MyProfilePage: FunctionComponent = () => {
 
         // Find the user with the matching email
         const matchedUser = response_users.find(
-          (user: any) => user.email === storedEmail
+          (user: any) => user.id === storedEmail
         );
         if (matchedUser) {
           setUsers(matchedUser);
+          setUserEmail(matchedUser.email);
         } else {
           setError("No matching user found in the database");
         }
@@ -187,6 +189,7 @@ const MyProfilePage: FunctionComponent = () => {
     fetchUser();
   }, []);
 
+  const handleChange = () => {};
   return (
     <div>
       {/* <Header2 /> */}
@@ -207,15 +210,28 @@ const MyProfilePage: FunctionComponent = () => {
             {!successful && (
               <div className="form-row" style={{ marginTop: "100px" }}>
                 <div
-                  className="form-group col-md-6"
-                  style={{ marginLeft: "400px" }}
+                  className="hello-jack-wrapper"
+                  style={{
+                    marginLeft: "450px",
+                    marginTop: "300px",
+                    fontSize: "300%",
+                  }}
                 >
-                  <label htmlFor="email"> </label>
+                  <strong className="hello-jack1">
+                    Hello ,{users?.first_name}
+                  </strong>
+                </div>
+                <div
+                  className="form-group col-md-6"
+                  style={{ marginLeft: "300px" }}
+                >
+                  <label htmlFor="email">Email </label>
                   <Field
                     name="email"
                     type="email"
                     className="form-control"
-                    placeholder={users?.email}
+                    value={userEmail}
+                    readOnly
                   />
                   <ErrorMessage
                     name="email"
@@ -226,22 +242,22 @@ const MyProfilePage: FunctionComponent = () => {
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "400px" }}
+                  style={{ marginLeft: "300px" }}
                 >
-                  <label htmlFor="address_line1"></label>
+                  <label htmlFor="address_line1">Address Line1</label>
                   <Field
                     name="address_line1"
                     type="text"
                     className="form-control"
-                    placeholder={users?.address_line2}
+                    placeholder={users?.address_line1}
                   />
                 </div>
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "400px" }}
+                  style={{ marginLeft: "300px" }}
                 >
-                  <label htmlFor="address_line2"> </label>
+                  <label htmlFor="address_line2">Address Line 2 </label>
                   <Field
                     name="address_line2"
                     type="text"
@@ -252,9 +268,9 @@ const MyProfilePage: FunctionComponent = () => {
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "400px" }}
+                  style={{ marginLeft: "300px" }}
                 >
-                  <label htmlFor="first_name"> </label>
+                  <label htmlFor="first_name">First Name </label>
                   <Field
                     name="first_name"
                     type="text"
@@ -265,9 +281,9 @@ const MyProfilePage: FunctionComponent = () => {
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "400px" }}
+                  style={{ marginLeft: "300px" }}
                 >
-                  <label htmlFor="last_name"> </label>
+                  <label htmlFor="last_name">Last Name </label>
                   <Field
                     name="last_name"
                     type="text"
@@ -278,9 +294,9 @@ const MyProfilePage: FunctionComponent = () => {
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "400px" }}
+                  style={{ marginLeft: "300px" }}
                 >
-                  <label htmlFor="phone_number"> </label>
+                  <label htmlFor="phone_number">Phone Number </label>
                   <Field
                     name="phone_number"
                     type="text"
@@ -291,9 +307,9 @@ const MyProfilePage: FunctionComponent = () => {
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "400px" }}
+                  style={{ marginLeft: "300px" }}
                 >
-                  <label htmlFor="city"> </label>
+                  <label htmlFor="city">City </label>
                   <Field
                     name="city"
                     type="text"
@@ -304,9 +320,9 @@ const MyProfilePage: FunctionComponent = () => {
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "400px" }}
+                  style={{ marginLeft: "300px" }}
                 >
-                  <label htmlFor="state_province"> </label>
+                  <label htmlFor="state_province">State / Province </label>
                   <Field
                     name="state_province"
                     type="text"
@@ -317,9 +333,9 @@ const MyProfilePage: FunctionComponent = () => {
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "400px" }}
+                  style={{ marginLeft: "300px" }}
                 >
-                  <label htmlFor="country"> </label>
+                  <label htmlFor="country">Country </label>
                   <Field
                     name="country"
                     type="text"
@@ -330,9 +346,9 @@ const MyProfilePage: FunctionComponent = () => {
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "400px" }}
+                  style={{ marginLeft: "300px" }}
                 >
-                  <label htmlFor="postcode"> </label>
+                  <label htmlFor="postcode">PostCode </label>
                   <Field
                     name="postcode"
                     type="text"
@@ -341,13 +357,20 @@ const MyProfilePage: FunctionComponent = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-dark btn-block">
-                  Create Account
+                <button
+                  type="submit"
+                  className="btn btn-custom"
+                  style={{ marginLeft: "300px", marginTop: "50px" }}
+                >
+                  Update
                 </button>
               </div>
             )}
             {message && (
-              <div className="form-group">
+              <div
+                className="form-group"
+                style={{ marginTop: "100px", marginLeft: "400px" }}
+              >
                 <div
                   className={
                     successful ? "alert alert-success" : "alert alert-danger"
@@ -361,13 +384,6 @@ const MyProfilePage: FunctionComponent = () => {
           </Form>
         </Formik>
       </main>
-
-      <div
-        className="hello-jack-wrapper"
-        style={{ marginLeft: "650px", marginTop: "200px", fontSize: "200%" }}
-      >
-        <strong className="hello-jack1">Hello ,{users?.first_name}</strong>
-      </div>
 
       {/* <div className="user-profile">
         <div className="user-profile-child" />

@@ -26,6 +26,7 @@ type ProductItem = {
   user_id: number;
   price: number;
   admin_checked: string;
+  available: string;
 };
 
 // type Pet = {
@@ -99,7 +100,8 @@ const DogPage: FunctionComponent = () => {
         const response_pet = response.data.filter(
           (pet: ProductItem) =>
             pet.type.toLowerCase() === "dog" &&
-            pet.admin_checked.toLowerCase() === "true"
+            pet.admin_checked.toLowerCase() === "true" &&
+            pet.available.toLowerCase() === "true"
         );
 
         if (condition === "lowToHigh" || condition === "highToLow") {

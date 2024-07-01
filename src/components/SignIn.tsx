@@ -247,7 +247,7 @@ export default class SignIn extends Component<Props, State> {
             <div className="form-group">
               <button
                 type="submit"
-                className="btn btn-primary"
+                className="btn btn-custom "
                 disabled={loading}
                 style={{ marginRight: "450px", marginTop: "50px" }}
               >

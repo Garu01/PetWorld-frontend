@@ -114,14 +114,15 @@ const ManagingPets: FunctionComponent = () => {
       title: "Actions",
       key: "actions",
       render: (text, record) => (
-        <button
+        <input
           onClick={(e) =>
             handleRemove(record.id, (e.target as HTMLButtonElement).value)
           }
-          className="btn btn-danger"
+          className="form-check-label"
+          type="checkbox"
         >
-          Remove
-        </button>
+          {/* {record.available ? "Available" : "Check"} */}
+        </input>
       ),
     },
   ];
@@ -132,7 +133,15 @@ const ManagingPets: FunctionComponent = () => {
   }, [navigate]);
 
   const handleRemove = (id: number, remove: string) => {
-    setRemoveCheck([...removeCheck, { id, remove: remove }]);
+    setRemoveCheck((prev) => {
+      const exists = prev.find((item) => item.id === id);
+      if (exists) {
+        return prev.filter((item) => item.id !== id);
+      } else {
+        return [...prev, { id, remove }];
+      }
+    });
+    console.log(removeCheck);
   };
 
   const handleSubmitRemove = () => {

@@ -16,8 +16,6 @@ import FiletoBase64 from "../util/common/toBase64";
 const UploadPets: FunctionComponent = () => {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
-  const [checkVaccinated, setCheckVaccinated] = useState("false");
-
   const [image, setImage] = useState("");
 
   const storedUserData = localStorage.getItem("user");
@@ -43,8 +41,8 @@ const UploadPets: FunctionComponent = () => {
     vaccinated: "",
     wormed_flead: "",
     health_checked: "",
-    admin_check: false,
-    available: false,
+    admin_check: "false",
+    available: "true",
   };
 
   // function for post pet data to server
@@ -66,8 +64,8 @@ const UploadPets: FunctionComponent = () => {
     vaccinated: string;
     wormed_flead: string;
     health_checked: string;
-    admin_check: boolean;
-    available: boolean;
+    admin_check: string;
+    available: string;
   }) => {
     const {
       user_id,
@@ -90,14 +88,6 @@ const UploadPets: FunctionComponent = () => {
       admin_check,
       available,
     } = formValue;
-
-    // for (const key in formValue) {
-    //   if (key === "image" && formValue[key]) {
-    //     formData.append(key, formValue[key] as File);
-    //   } else {
-    //     formData.append(key, (formValue as any)[key]);
-    //   }
-    // }
 
     setMessage("");
     setSuccessful(false);
@@ -142,16 +132,12 @@ const UploadPets: FunctionComponent = () => {
   };
 
   const [preview, setPreview] = useState("");
-  const handleImageChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void
-  ) => {
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.currentTarget.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result as string);
-        setFieldValue("image", file);
       };
       reader.readAsDataURL(file);
     }
@@ -399,17 +385,6 @@ const UploadPets: FunctionComponent = () => {
                       type="file"
                       id="image"
                       name="image"
-                      // onChange={(event) => {
-                      //   let reader = new FileReader();
-                      //   reader.onloadend = () =>{
-                      //     if(reader.readyState ===2){
-                      //       setFieldValue("image", reader.result);
-                      //     }
-                      //   }
-                      //   reader.readAsDataURL(event.target.files?.[0]);
-                      // }}
-
-                      // when upload function, this function will change image value to base64
                       onChange={async (event) => {
                         if (
                           event.currentTarget.files &&
@@ -420,27 +395,15 @@ const UploadPets: FunctionComponent = () => {
                             event.currentTarget.files[0]
                           );
                           setFieldValue("image", base64);
+                          // const reader = new FileReader();
+                          // reader.onloadend = () => {
+                          //   if (typeof reader.result === "string") {
+                          //     setPreview(reader.result);
+                          //   }
+                          // };
+                          // reader.readAsDataURL(event.currentTarget.files[0]);
                         }
                       }}
-                      // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      //   const file = e.target.files?.[0];
-                      //   const reader = new FileReader();
-
-                      //   reader.onloadend = () => {
-                      //     const base64String = reader.result
-                      //       ?.toString()
-                      //       .split(",")[1];
-                      //     if (base64String) {
-                      //       setBase64Image(base64String);
-                      //       setNewImage(reader.result?.toString() || null);
-                      //       setFieldValue("image", base64String);
-                      //     }
-                      //   };
-
-                      //   if (file) {
-                      //     reader.readAsDataURL(file);
-                      //   }
-                      // }}
                     />
                     {preview && <img src={preview} alt="Preview" width="100" />}
                   </div>
@@ -476,14 +439,16 @@ const UploadPets: FunctionComponent = () => {
                         <input type="radio" name="vaccinated" value="false" />
                         No
                       </label>
-                      <Field
-                        type="input"
-                        name="vaccinated"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setFieldValue("vaccinated", e.target.value)
-                        }
-                      />
                     </div>
+                    <Field
+                      type="input"
+                      name="vaccinated"
+                      className="form-control"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setFieldValue("vaccinated", e.target.value)
+                      }
+                      placeholder="Which vaccine"
+                    />
                   </div>
 
                   <div
@@ -528,16 +493,18 @@ const UploadPets: FunctionComponent = () => {
                       <Field
                         type="input"
                         name="health_checked"
+                        className="form-control"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                           setFieldValue("health_checked", e.target.value)
                         }
+                        placeholder="Health certificate"
                       />
                     </div>
                   </div>
 
                   <button
                     type="submit"
-                    className="btn btn-dark btn-block"
+                    className="btn btn-custom"
                     style={{ marginLeft: "200px", marginTop: "15px" }}
                   >
                     UPLOAD PET

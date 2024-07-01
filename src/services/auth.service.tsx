@@ -21,6 +21,7 @@ class AuthService {
   // remove user data from local storage
   logout() {
     localStorage.removeItem("user");
+    localStorage.removeItem("shopping_cart");
   }
 
   // send information for register to sever to save in database
@@ -59,6 +60,16 @@ class AuthService {
 
     return null;
   }
+
+  getRolesFromLocalStorage = (): string[] => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      return user.roles || [];
+    } catch (error) {
+      console.error("Error parsing local storage item", error);
+      return [];
+    }
+  };
 
   getCurrentShoppingCart() {
     const userStr = localStorage.getItem("shopping_cart");

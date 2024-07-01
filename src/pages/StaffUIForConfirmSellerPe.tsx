@@ -124,39 +124,47 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
       dataIndex: "available",
       key: "available",
       render: (text, record) => (
-        <button
+        <input
           onClick={(e) =>
             handleCheckAvailable(
               record.id,
               (e.target as HTMLButtonElement).value
             )
           }
-          className={record.available ? "btn btn-success" : "btn btn-secondary"}
-          value="true"
+          className="form-check-label"
+          type="checkbox"
         >
-          {record.available ? "Available" : "Check"}
-        </button>
+          {/* {record.available ? "Available" : "Check"} */}
+        </input>
       ),
     },
     {
       title: "Actions",
       key: "actions",
       render: (text, record) => (
-        <button
+        <input
           onClick={(e) =>
             handleRemove(record.id, (e.target as HTMLButtonElement).value)
           }
-          className="btn btn-danger"
+          className="form-check-label"
+          type="checkbox"
         >
-          Remove
-        </button>
+          {/* {record.available ? "Available" : "Check"} */}
+        </input>
       ),
     },
   ];
 
   const handleCheckAvailable = (id: number, available: string) => {
-    setAvailableCheck([...availableCheck, { id, available: available }]);
-    console.log(availableCheck);
+    setAvailableCheck((prev) => {
+      const exists = prev.find((item) => item.id === id);
+      if (exists) {
+        return prev.filter((item) => item.id !== id);
+      } else {
+        return [...prev, { id, available }];
+      }
+    });
+    console.log(removeCheck);
   };
 
   const handleSubmitAvailable = () => {
@@ -183,8 +191,19 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
         }
       );
   };
+  // const handleRemove = (id: number, remove: string) => {
+  //   setRemoveCheck([...removeCheck, { id, remove: remove }]);
+  // };
   const handleRemove = (id: number, remove: string) => {
-    setRemoveCheck([...removeCheck, { id, remove: remove }]);
+    setRemoveCheck((prev) => {
+      const exists = prev.find((item) => item.id === id);
+      if (exists) {
+        return prev.filter((item) => item.id !== id);
+      } else {
+        return [...prev, { id, remove }];
+      }
+    });
+    console.log(removeCheck);
   };
 
   const handleSubmitRemove = () => {
@@ -422,7 +441,12 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <Table columns={columns} dataSource={pets} rowKey="id" />
+        <Table
+          columns={columns}
+          dataSource={pets}
+          rowKey="id"
+          style={{ marginTop: "50px" }}
+        />
       )}
 
       <button

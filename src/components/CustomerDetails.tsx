@@ -2,6 +2,7 @@ import { ChangeEvent, FunctionComponent } from "react";
 import "./CustomerDetails.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import FirstName from "./FirstName";
 export type CustomerDetailsType = {
   first_name: string;
   last_name: string;
@@ -37,18 +38,13 @@ const CustomerDetails: FunctionComponent<CustomerDetailsType> = ({
       <div className="last-name-input3">
         <div className="last-name-fields">
           <div className="last-name75">
-            <input
-              className="last-name76"
-              value={first_name}
-              onChange={handleChange}
-              type="text"
-            />
+            <input className="last-name76" value={first_name} readOnly />
           </div>
           <div className="last-name77">
             <input
               className="last-name78"
               value={last_name}
-              onChange={handleChange}
+              readOnly
               type="text"
             />
           </div>
@@ -58,41 +54,26 @@ const CustomerDetails: FunctionComponent<CustomerDetailsType> = ({
             <input
               className="last-name80"
               value={phone_number}
-              onChange={handleChange}
+              readOnly
               type="text"
             />
           </div>
           <div className="last-name81">
-            <input
-              className="last-name82"
-              value={email}
-              onChange={handleChange}
-              type="text"
-            />
+            <input className="last-name84" value={email} readOnly type="text" />
           </div>
         </div>
         <div className="last-name83">
-          <input
-            className="last-name84"
-            value={address}
-            onChange={handleChange}
-            type="text"
-          />
+          <input className="last-name84" value={address} readOnly type="text" />
         </div>
         <div className="last-name-fields2">
           <div className="last-name85">
-            <input
-              className="last-name86"
-              value={city}
-              onChange={handleChange}
-              type="text"
-            />
+            <input className="last-name86" value={city} readOnly type="text" />
           </div>
           <div className="last-name87">
             <input
               className="last-name88"
               value={country}
-              onChange={handleChange}
+              readOnly
               type="text"
             />
           </div>
@@ -104,7 +85,7 @@ const CustomerDetails: FunctionComponent<CustomerDetailsType> = ({
             <input
               className="last-name90"
               value={postcode}
-              onChange={handleChange}
+              readOnly
               type="text"
             />
           </div>

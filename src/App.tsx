@@ -32,12 +32,16 @@ import IUser from "./types/user.type";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import Header1 from "./components/Header1";
 import ManagePetDetails from "./pages/ManagePetDetails";
+import AdminRoute from "./components/adminRoute";
 type State = {
+  isUser: boolean;
   isAdmin: boolean;
   User: IUser | undefined;
 };
 function App() {
-  const [user, setUser] = useState<State>({ isAdmin: true, User: undefined });
+  const [user, setUser] = useState(false);
+  const [admin, setAdmin] = useState(false);
+
   const action = useNavigationType();
   const location = useLocation();
   const pathname = location.pathname;
@@ -48,6 +52,13 @@ function App() {
   //     isAdmin: currentUser.roles.includes("ROLE_ADMIN"),
   //     User: currentUser,
   //   });
+  // }
+
+  // if (currentUser !== undefined) {
+  //   setUser(true);
+  //   currentUser.roles.includes("ROLE_ADMIN")
+  //     ? setAdmin(true)
+  //     : setAdmin(false);
   // }
   useEffect(() => {
     if (action !== "POP") {
@@ -142,11 +153,11 @@ function App() {
       <Route path="/homepage" element={<HomePage />} />
       <Route path="/login-register-page" element={<LoginRegisterPage />} />
       <Route path="/create-new-account" element={<CreateNewAccount />} />
-      <Route path="/user-main-page" element={<UserMainPage />} />
-      <Route
+
+      {/* <Route
         path="/staff-ui-for-confirm-seller-pets"
         element={<StaffUIForConfirmSellerPe />}
-      />
+      /> */}
       {/* <Route
           path="/staff-ui-for-confirm-seller-pets"
           element={
@@ -159,28 +170,65 @@ function App() {
             </ProtectedRoute>
           }
         /> */}
-      <Route element={user.isAdmin}>
-        <Route
-          path="/staff-ui-for-confirm-seller-pets"
-          element={<StaffUIForConfirmSellerPe />}
-        />
-      </Route>
+
+      <Route
+        path="/staff-ui-for-confirm-seller-pets"
+        element={<AdminRoute element={<StaffUIForConfirmSellerPe />} />}
+      />
+      {/* <Route
+        path="/staff-ui-for-confirm-seller-pets"
+        element={
+          <ProtectedRoute roles={["ROLE_ADMIN"]} element={<ManagingPets />} />
+        }
+      /> */}
+
+      <Route
+        path="/user-main-page"
+        element={
+          <ProtectedRoute roles={"ROLE_USER"} element={<UserMainPage />} />
+        }
+      />
+      <Route
+        path="/upload-pets"
+        element={
+          <ProtectedRoute roles={"ROLE_USER"} element={<UploadPets />} />
+        }
+      />
+      <Route
+        path="/payment-method"
+        element={
+          <ProtectedRoute roles={"ROLE_USER"} element={<PaymentMethod />} />
+        }
+      />
+      <Route
+        path="/my-profile-page"
+        element={
+          <ProtectedRoute roles={"ROLE_USER"} element={<MyProfilePage />} />
+        }
+      />
+      <Route
+        path="/manage-pet/:productId"
+        element={
+          <ProtectedRoute roles={"ROLE_USER"} element={<ManagePetDetails />} />
+        }
+      />
+      <Route
+        path="/manage-pets"
+        element={
+          <ProtectedRoute roles={"ROLE_USER"} element={<ManagingPets />} />
+        }
+      />
       <Route path="/ui-for-staff" element={<UIForStaff />} />
       <Route path="/dog-page" element={<DogPage />} />
       <Route path="/cat-page" element={<CatPage />} />
       <Route path="/fish-page" element={<FishPage />} />
       <Route path="/bird-page" element={<BirdPage />} />
       <Route path="/about-us-page" element={<AboutUsPage />} />
-      <Route path="/upload-pets" element={<UploadPets />} />
-      <Route path="/payment-method" element={<PaymentMethod />} />
-      <Route path="/my-profile-page" element={<MyProfilePage />} />
       <Route path="/pets-details" element={<PetsDetails />} />
       <Route path="/cart-view" element={<CartView />} />
       <Route path="/check-out" element={<CheckOut />} />
-      <Route path="/test" element={<FirebaseImageUpload />} />
+      {/* <Route path="/test" element={<FirebaseImageUpload />} /> */}
       <Route path="/products/:productId" element={<PetsDetails />} />
-      <Route path="/manage-pet/:productId" element={<ManagePetDetails />} />
-      <Route path="/manage-pets" element={<ManagingPets />} />
     </Routes>
   );
 }

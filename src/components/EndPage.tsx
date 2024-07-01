@@ -1,11 +1,26 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useCallback } from "react";
 import "./EndPage.css";
-
+import { useNavigate } from "react-router-dom";
 export type EndPageType = {
   className?: string;
 };
 
 const EndPage: FunctionComponent<EndPageType> = ({ className = "" }) => {
+  const navigate = useNavigate();
+
+  const onDogPageClick = useCallback(() => {
+    navigate("/dog-page");
+  }, [navigate]);
+  const onCatPageClick = useCallback(() => {
+    navigate("/cat-page");
+  }, [navigate]);
+  const onBirdPageClick = useCallback(() => {
+    navigate("/bird-page");
+  }, [navigate]);
+  const onFishPageClick = useCallback(() => {
+    navigate("/fish-page");
+  }, [navigate]);
+
   return (
     <div className={`end-page ${className}`}>
       <div className="intro">
@@ -18,10 +33,18 @@ const EndPage: FunctionComponent<EndPageType> = ({ className = "" }) => {
       </div>
       <div className="quick-links">
         <b className="quick-links1">Quick Links</b>
-        <div className="dogs">Dogs</div>
-        <div className="cats">Cats</div>
-        <div className="birds">Birds</div>
-        <div className="fish3">Fish</div>
+        <div className="dogs" onClick={onDogPageClick}>
+          Dogs
+        </div>
+        <div className="cats" onClick={onCatPageClick}>
+          Cats
+        </div>
+        <div className="birds" onClick={onBirdPageClick}>
+          Birds
+        </div>
+        <div className="fish3" onClick={onFishPageClick}>
+          Fish
+        </div>
       </div>
       <div className="helpspt">
         <b className="help-support">{`Help & Support`}</b>
