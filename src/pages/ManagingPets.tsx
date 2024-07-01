@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState, useEffect, useCallback } from "react";
 import Header from "../components/Header";
 import FrameComponent from "../components/FrameComponent";
 import PetListContainer from "../components/PetListContainer";
@@ -6,6 +6,9 @@ import "./ManagingPets.css";
 import AuthService from "../services/auth.service";
 import PetService from "../services/pet.service";
 import axios from "axios";
+import { Space, Table, Tag } from "antd";
+import type { ColumnsType } from "antd/es/table";
+import { useNavigate, Link } from "react-router-dom";
 interface Pet {
   id: number;
   type: string;
@@ -19,16 +22,23 @@ interface Pet {
   createAt: string;
 }
 
+type PetRemove = {
+  id: number;
+  remove: string;
+};
 const ManagingPets: FunctionComponent = () => {
   const currentUser = AuthService.getCurrentUser();
   const [pets, setPets] = useState<Pet[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [successful, setSuccessful] = useState(false);
+  const [message, setMessage] = useState("");
+  const [removeCheck, setRemoveCheck] = useState<PetRemove[]>([]);
   useEffect(() => {
     const fetchPets = async () => {
       try {
         const response = await axios.get<Pet[]>(
-          "http://localhost:8080/api/userPet"
+          "http://localhost:8080/api/showPet"
         );
         const responsePet = response.data.filter(
           (pet) => pet.user_id === currentUser.id
@@ -46,9 +56,114 @@ const ManagingPets: FunctionComponent = () => {
     fetchPets();
   }, []);
 
+  const columns: ColumnsType<Pet> = [
+    {
+      title: "Seller Name",
+      dataIndex: "first_name",
+      key: "first_name",
+      render: (text: string) => <a>{text}</a>,
+    },
+    {
+      title: "Image",
+      dataIndex: "base64String",
+      key: "base64String",
+      render: (base64String) => (
+        <img
+          src={`data:image/png;base64,${base64String}`}
+          alt="pet"
+          style={{ width: "100px" }}
+        />
+      ),
+    },
+    {
+      title: "Title",
+      dataIndex: "title",
+      key: "title",
+    },
+    {
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
+    },
+    {
+      title: "Edit",
+      dataIndex: "edit",
+      key: "edit",
+      render: (text, record) => (
+        <Link
+          to={`/manage-pet/${record.id}`}
+          style={{ marginLeft: "100px" }}
+          // onClick={(e) =>
+          //   handleCheckAvailable(
+          //     record.id,
+          //     (e.target as HTMLButtonElement).value
+          //   )
+          // }
+          className={record.available ? "btn btn-success" : "btn btn-secondary"}
+        >
+          {record.available ? "Available" : "edit"}
+        </Link>
+      ),
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (text, record) => (
+        <button
+          onClick={(e) =>
+            handleRemove(record.id, (e.target as HTMLButtonElement).value)
+          }
+          className="btn btn-danger"
+        >
+          Remove
+        </button>
+      ),
+    },
+  ];
+
+  const navigate = useNavigate();
+  const handleEdit = useCallback(() => {
+    navigate("/");
+  }, [navigate]);
+
+  const handleRemove = (id: number, remove: string) => {
+    setRemoveCheck([...removeCheck, { id, remove: remove }]);
+  };
+
+  const handleSubmitRemove = () => {
+    setSuccessful(false);
+    setMessage("");
+    console.log(removeCheck);
+    axios
+      .post("http://localhost:8080/api/userRemove", {
+        removeCheck,
+      })
+      .then(
+        (response) => {
+          setMessage(response.data.message);
+          setSuccessful(true);
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          setSuccessful(false);
+          setMessage(resMessage);
+        }
+      );
+  };
+
   return (
-    <div className="managing-pets">
-      <Header />
+    <div className="managing-pets" style={{ marginTop: "50px" }}>
       <main className="user-container-parent">
         <div className="user-container">
           <div className="user-info">
@@ -133,8 +248,9 @@ const ManagingPets: FunctionComponent = () => {
             />
           ))}
         </section> */}
-        <div className="container mt-4">
-          <table className="table table-bordered">
+        {/* <div className="container .container-xxl mt-4"> */}
+        <Table columns={columns} dataSource={pets} rowKey="id" />
+        {/* <table className="table table-bordered">
             <thead className="thead-light">
               <tr>
                 <th>#</th>
@@ -173,8 +289,31 @@ const ManagingPets: FunctionComponent = () => {
                 </tr>
               ))}
             </tbody>
-          </table>
-        </div>
+          </table> */}
+        {/* </div> */}
+        <button
+          onClick={handleSubmitRemove}
+          className="btn btn-danger"
+          type="submit"
+          style={{ marginTop: "300px" }}
+        >
+          Remove
+        </button>
+        {message && (
+          <div
+            className="form-group"
+            style={{ marginLeft: "200px", marginTop: "15px" }}
+          >
+            <div
+              className={
+                successful ? "alert alert-success" : "alert alert-danger"
+              }
+              role="alert"
+            >
+              {message}
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

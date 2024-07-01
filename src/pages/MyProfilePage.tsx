@@ -12,6 +12,7 @@ import { Navigate } from "react-router-dom";
 import Header2 from "../components/Header2";
 import FrameComponent from "../components/FrameComponent";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import UserProfile from "../services/user-profile";
 import * as Yup from "yup";
 
 type Props = {};
@@ -48,30 +49,35 @@ const MyProfilePage: FunctionComponent = () => {
     }
   };
 
-  const initialValues = {
-    email: "",
-    first_name: "",
-    last_name: "",
-    phone_number: "",
-    address_line1: "",
-    address_line2: "",
-    city: "",
-    state_province: "",
-    country: "",
-    postcode: "",
-  };
+  const initialValues = users
+    ? {
+        email: users.email,
+        first_name: users.first_name,
+        last_name: users.last_name,
+        phone_number: users.phone_number,
+        address_line1: users.address_line1,
+        address_line2: users.address_line2,
+        city: users.city,
+        state_province: users.state_province,
+        country: users.country,
+        postcode: users.postcode,
+      }
+    : {
+        email: "",
+        first_name: "",
+        last_name: "",
+        phone_number: "",
+        address_line1: "",
+        address_line2: "",
+        city: "",
+        state_province: "",
+        country: "",
+        postcode: "",
+      };
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("This is not a valid email.")
-      .required("This field is required!"),
-    password: Yup.string()
-      .test(
-        "len",
-        "The password must be between 6 and 40 characters.",
-        (val: any) =>
-          val && val.toString().length >= 6 && val.toString().length <= 40
-      )
       .required("This field is required!"),
   });
 
@@ -100,10 +106,13 @@ const MyProfilePage: FunctionComponent = () => {
       postcode,
     } = formValue;
 
+    const user_id = AuthService.getCurrentUser().id;
+
     setMessage("");
     setSuccessful(false);
 
-    AuthService.updateInfo(
+    UserProfile.updateInfo(
+      user_id,
       email,
       first_name,
       last_name,
@@ -194,199 +203,162 @@ const MyProfilePage: FunctionComponent = () => {
           onSubmit={handleRegister}
           enableReinitialize
         >
-          {({ setFieldValue, handleChange }) => (
-            <Form className="needs-validation" noValidate>
+          <Form>
+            {!successful && (
               <div className="form-row" style={{ marginTop: "100px" }}>
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "200px" }}
+                  style={{ marginLeft: "400px" }}
                 >
-                  <label htmlFor="email">Email </label>
+                  <label htmlFor="email"> </label>
                   <Field
                     name="email"
                     type="email"
                     className="form-control"
                     placeholder={users?.email}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setFieldValue("email", e.target.value)
-                    }
                   />
-
-                  {/* <ErrorMessage
-          name="email"
-          component="div"
-          className="alert alert-danger"
-        /> */}
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="alert alert-danger"
+                  />
                 </div>
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "200px" }}
+                  style={{ marginLeft: "400px" }}
                 >
-                  <label htmlFor="address_line1">Address Line 1</label>
+                  <label htmlFor="address_line1"></label>
                   <Field
                     name="address_line1"
                     type="text"
                     className="form-control"
-                    value={users?.address_line1}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setFieldValue("address_line1", e.target.value)
-                    }
+                    placeholder={users?.address_line2}
                   />
                 </div>
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "200px" }}
+                  style={{ marginLeft: "400px" }}
                 >
-                  <label htmlFor="address_line2">Address Line 2 </label>
+                  <label htmlFor="address_line2"> </label>
                   <Field
                     name="address_line2"
                     type="text"
                     className="form-control"
-                    value={users?.address_line2}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setFieldValue("address_line2", e.target.value)
-                    }
+                    placeholder={users?.address_line2}
                   />
                 </div>
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "200px" }}
+                  style={{ marginLeft: "400px" }}
                 >
-                  <label htmlFor="first_name">First Name</label>
+                  <label htmlFor="first_name"> </label>
                   <Field
                     name="first_name"
                     type="text"
                     className="form-control"
-                    value={users?.first_name}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setFieldValue("first_name", e.target.value)
-                    }
+                    placeholder={users?.first_name}
                   />
                 </div>
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "200px" }}
+                  style={{ marginLeft: "400px" }}
                 >
-                  <label htmlFor="last_name">Last Name </label>
+                  <label htmlFor="last_name"> </label>
                   <Field
                     name="last_name"
                     type="text"
                     className="form-control"
-                    value={users?.last_name}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setFieldValue("last_name", e.target.value)
-                    }
+                    placeholder={users?.last_name}
                   />
                 </div>
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "200px" }}
+                  style={{ marginLeft: "400px" }}
                 >
-                  <label htmlFor="phone_number">Phone Number </label>
+                  <label htmlFor="phone_number"> </label>
                   <Field
                     name="phone_number"
                     type="text"
                     className="form-control"
-                    value={users?.phone_number}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setFieldValue("phone_number", e.target.value)
-                    }
+                    placeholder={users?.phone_number}
                   />
                 </div>
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "200px" }}
+                  style={{ marginLeft: "400px" }}
                 >
-                  <label htmlFor="city">City </label>
+                  <label htmlFor="city"> </label>
                   <Field
                     name="city"
                     type="text"
                     className="form-control"
-                    value={users?.city}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setFieldValue("city", e.target.value)
-                    }
+                    placeholder={users?.city}
                   />
                 </div>
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "200px" }}
+                  style={{ marginLeft: "400px" }}
                 >
-                  <label htmlFor="state_province">State / Province </label>
+                  <label htmlFor="state_province"> </label>
                   <Field
                     name="state_province"
                     type="text"
                     className="form-control"
-                    value={users?.state_province}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setFieldValue("state_province", e.target.value)
-                    }
+                    placeholder={users?.state_province}
                   />
                 </div>
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "200px" }}
+                  style={{ marginLeft: "400px" }}
                 >
-                  <label htmlFor="country">Country </label>
+                  <label htmlFor="country"> </label>
                   <Field
                     name="country"
                     type="text"
                     className="form-control"
-                    value={users?.country}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setFieldValue("country", e.target.value)
-                    }
+                    placeholder={users?.country}
                   />
                 </div>
 
                 <div
                   className="form-group col-md-6"
-                  style={{ marginLeft: "200px" }}
+                  style={{ marginLeft: "400px" }}
                 >
-                  <label htmlFor="postcode">Postcode </label>
+                  <label htmlFor="postcode"> </label>
                   <Field
                     name="postcode"
                     type="text"
                     className="form-control"
-                    value={users?.postcode}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setFieldValue("postcode", e.target.value)
-                    }
+                    placeholder={users?.postcode}
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-dark btn-block"
-                  style={{ marginLeft: "200px", marginTop: "15px" }}
-                >
-                  Update
+
+                <button type="submit" className="btn btn-dark btn-block">
+                  Create Account
                 </button>
               </div>
-              {message && (
+            )}
+            {message && (
+              <div className="form-group">
                 <div
-                  className="form-group"
-                  style={{ marginLeft: "200px", marginTop: "15px" }}
+                  className={
+                    successful ? "alert alert-success" : "alert alert-danger"
+                  }
+                  role="alert"
                 >
-                  <div
-                    className={
-                      successful ? "alert alert-success" : "alert alert-danger"
-                    }
-                    role="alert"
-                  >
-                    {message}
-                  </div>
+                  {message}
                 </div>
-              )}
-            </Form>
-          )}
+              </div>
+            )}
+          </Form>
         </Formik>
       </main>
 

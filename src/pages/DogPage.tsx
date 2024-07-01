@@ -8,7 +8,7 @@ import {
 import Header2 from "../components/Header2";
 import FrameComponent1 from "../components/FrameComponent1";
 import Dog from "../components/Dog";
-import EndPage1 from "../components/EndPage1";
+
 import "./DogPage.css";
 import axios from "axios";
 import AuthService from "../services/auth.service";
@@ -17,7 +17,6 @@ import { Buffer } from "buffer";
 import PetCard from "../components/PetCard";
 import { useShoppingContext } from "../context/shoppingContext";
 import { useNavigate, Link } from "react-router-dom";
-
 type ProductItem = {
   id: number;
   type: string;
@@ -221,7 +220,6 @@ const DogPage: FunctionComponent = () => {
           </div>
         </div>
       </section>
-      <EndPage1 />
     </div>
 
     // <div className="row">

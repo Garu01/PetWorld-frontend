@@ -1,10 +1,16 @@
-import { FunctionComponent, useState, useCallback, Component } from "react";
+import {
+  FunctionComponent,
+  useState,
+  useCallback,
+  Component,
+  useEffect,
+} from "react";
 import UserRow from "../components/UserRow";
 import FrameComponent from "../components/FrameComponent";
 import CreateAccount1 from "../components/CreateAccount1";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, useParams } from "react-router-dom";
 import PetService from "../services/pet.service";
 import AuthService from "../services/auth.service";
 import "./UploadPets.css";
@@ -12,44 +18,115 @@ import Header2 from "../components/Header2";
 import HeaderTop from "../components/HeaderTop";
 import { MenuItem, Select } from "@mui/material";
 import FiletoBase64 from "../util/common/toBase64";
+import axios from "axios";
 
+interface Pet {
+  id: number;
+  user_id: number;
+  pet_type: string;
+  pet_breed: string;
+  pet_title: string;
+  pet_color: string;
+  location: string;
+  price: number;
+  advertisement_type: string;
+  contact_preference: string;
+  date_of_birth: Date;
+  weight: string;
+  sex: string;
+  image: string;
+  microchiped: string;
+  vaccinated: string;
+  wormed_flead: string;
+  health_checked: string;
+}
 const UploadPets: FunctionComponent = () => {
+  const { productId } = useParams<{ productId: string }>();
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [checkVaccinated, setCheckVaccinated] = useState("false");
-
   const [image, setImage] = useState("");
-
   const storedUserData = localStorage.getItem("user");
+  const currentUser = AuthService.getCurrentUser();
+  const [pet, setPet] = useState<Pet | null>(null);
 
-  const userInfo = AuthService.getCurrentUser();
+  useEffect(() => {
+    const fetchPets = async () => {
+      if (productId === undefined) {
+        console.error("Invalid productId");
+        setLoading(false);
+        return;
+      }
 
+      const productIdNumber = parseInt(productId, 10);
+
+      if (isNaN(productIdNumber)) {
+        console.error("productId is not a valid number");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await axios.get<Pet[]>(
+          "http://localhost:8080/api/showUserPet"
+        );
+        const responsePet = response.data.find(
+          (pet) => pet.id === productIdNumber
+        );
+
+        setPet(responsePet || null);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching pets:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPets();
+  }, [productId]);
   // initialize value
-  const initialValues = {
-    user_id: userInfo.id,
-    pet_type: "",
-    pet_breed: "",
-    pet_title: "",
-    pet_color: "",
-    location: "",
-    price: 0.0,
-    advertisement_type: "",
-    contact_preference: "",
-    date_of_birth: new Date("2000-01-01"),
-    weight: "",
-    sex: "",
-    image: "",
-    microchiped: "",
-    vaccinated: "",
-    wormed_flead: "",
-    health_checked: "",
-    admin_check: false,
-    available: false,
-  };
+  const initialValues = pet
+    ? {
+        pet_type: pet.pet_type,
+        pet_breed: pet.pet_breed,
+        pet_title: pet.pet_title,
+        pet_color: pet.pet_color,
+        location: pet.location,
+        price: pet.price,
+        advertisement_type: pet.advertisement_type,
+        contact_preference: pet.contact_preference,
+        date_of_birth: pet.date_of_birth,
+        weight: pet.weight,
+        sex: pet.sex,
+        image: pet.image,
+        microchiped: pet.microchiped,
+        vaccinated: pet.vaccinated,
+        wormed_flead: pet.wormed_flead,
+        health_checked: pet.health_checked,
+      }
+    : {
+        pet_type: "",
+        pet_breed: "",
+        pet_title: "",
+        pet_color: "",
+        location: "",
+        price: 0,
+        advertisement_type: "",
+        contact_preference: "",
+        date_of_birth: new Date("1999-01-01"),
+        weight: "",
+        sex: "",
+        image: "",
+        microchiped: "",
+        vaccinated: "",
+        wormed_flead: "",
+        health_checked: "",
+      };
 
-  // function for post pet data to server
-  const handleUpload = (formValue: {
-    user_id: number;
+  const handleUpdatePet = (formValue: {
     pet_type: string;
     pet_breed: string;
     pet_title: string;
@@ -66,11 +143,8 @@ const UploadPets: FunctionComponent = () => {
     vaccinated: string;
     wormed_flead: string;
     health_checked: string;
-    admin_check: boolean;
-    available: boolean;
   }) => {
     const {
-      user_id,
       pet_type,
       pet_breed,
       pet_title,
@@ -87,8 +161,6 @@ const UploadPets: FunctionComponent = () => {
       vaccinated,
       wormed_flead,
       health_checked,
-      admin_check,
-      available,
     } = formValue;
 
     // for (const key in formValue) {
@@ -102,7 +174,14 @@ const UploadPets: FunctionComponent = () => {
     setMessage("");
     setSuccessful(false);
 
-    PetService.upload(
+    const user_id = AuthService.getCurrentUser().id;
+    let id = 0;
+    if (productId === undefined) {
+      id = 0;
+    } else productId && (id = parseInt(productId, 10));
+    const admin_check = "false";
+    PetService.updatePet(
+      id,
       user_id,
       pet_type,
       pet_breed,
@@ -120,8 +199,7 @@ const UploadPets: FunctionComponent = () => {
       vaccinated,
       wormed_flead,
       health_checked,
-      admin_check,
-      available
+      admin_check
     ).then(
       (response) => {
         setMessage(response.data.message);
@@ -196,6 +274,7 @@ const UploadPets: FunctionComponent = () => {
   //     reader.readAsDataURL(file);
   //   }
   // };
+  const handleUpload = () => {};
 
   return (
     <div className="upload-pets">
@@ -212,7 +291,7 @@ const UploadPets: FunctionComponent = () => {
         <Formik
           initialValues={initialValues}
           //validationSchema={validationSchema}
-          onSubmit={handleUpload}
+          onSubmit={handleUpdatePet}
           enableReinitialize
         >
           {({ setFieldValue, handleChange }) => (
@@ -252,7 +331,7 @@ const UploadPets: FunctionComponent = () => {
                       name="pet_breed"
                       type="text"
                       className="form-control"
-                      placeholder="Pet Breed"
+                      placeholder={pet?.pet_breed}
                     />
                   </div>
 
@@ -265,7 +344,7 @@ const UploadPets: FunctionComponent = () => {
                       name="pet_title"
                       type="pet_title"
                       className="form-control"
-                      placeholder="Pet title"
+                      placeholder={pet?.pet_title}
                     />
                     {/* <ErrorMessage
                   name="password"
@@ -283,7 +362,7 @@ const UploadPets: FunctionComponent = () => {
                       name="pet_color"
                       type="text"
                       className="form-control"
-                      placeholder="Pet color"
+                      placeholder={pet?.pet_color}
                     />
                     {/* <ErrorMessage
                   name="confirmPassWord"
@@ -301,7 +380,7 @@ const UploadPets: FunctionComponent = () => {
                       name="location"
                       type="text"
                       className="form-control"
-                      placeholder="Location"
+                      placeholder={pet?.location}
                     />
                   </div>
 
@@ -314,7 +393,7 @@ const UploadPets: FunctionComponent = () => {
                       name="price"
                       type="text"
                       className="form-control"
-                      placeholder="Price"
+                      placeholder={pet?.price}
                     />
                   </div>
 
@@ -329,7 +408,7 @@ const UploadPets: FunctionComponent = () => {
                       name="advertisement_type"
                       type="text"
                       className="form-control"
-                      placeholder="Advertisement type"
+                      placeholder={pet?.advertisement_type}
                     />
                   </div>
 
@@ -342,7 +421,7 @@ const UploadPets: FunctionComponent = () => {
                       name="date_of_birth"
                       type="text"
                       className="form-control"
-                      placeholder="Date of birth"
+                      placeholder={pet?.date_of_birth}
                     />
                   </div>
 
@@ -357,7 +436,7 @@ const UploadPets: FunctionComponent = () => {
                       name="contact_preference"
                       type="text"
                       className="form-control"
-                      placeholder="Contact Preference"
+                      placeholder={pet?.contact_preference}
                     />
                   </div>
 
@@ -370,7 +449,7 @@ const UploadPets: FunctionComponent = () => {
                       name="weight"
                       type="number"
                       className="form-control"
-                      placeholder=" weight"
+                      placeholder={pet?.weight}
                     />
                   </div>
 
@@ -477,6 +556,7 @@ const UploadPets: FunctionComponent = () => {
                         No
                       </label>
                       <Field
+                        placeholder={pet?.vaccinated}
                         type="input"
                         name="vaccinated"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -526,6 +606,7 @@ const UploadPets: FunctionComponent = () => {
                         No
                       </label>
                       <Field
+                        placeholder={pet?.health_checked}
                         type="input"
                         name="health_checked"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

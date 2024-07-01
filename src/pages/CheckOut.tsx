@@ -181,17 +181,20 @@ const CheckOut: FunctionComponent = () => {
     // </div>
     <div>
       {!successful && (
-        <div className="row">
-          <CustomerDetails
-            first_name={users?.first_name}
-            last_name={users?.last_name}
-            email={users?.email}
-            phone_number={users?.phone_number}
-            city={users?.city}
-            country={users?.country}
-            postcode={users?.postcode}
-            address={users?.address_line1}
-          />
+        <div className="row" style={{ marginTop: "15px" }}>
+          {users && (
+            <CustomerDetails
+              first_name={users.first_name}
+              last_name={users.last_name}
+              email={users.email}
+              phone_number={users.phone_number}
+              city={users.city}
+              country={users.country}
+              postcode={users.postcode}
+              address={users.address_line1}
+            />
+          )}
+
           <table className="table table-hover">
             <thead>
               <tr>

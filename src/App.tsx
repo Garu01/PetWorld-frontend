@@ -31,6 +31,7 @@ import Header2 from "./components/Header2";
 import IUser from "./types/user.type";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import Header1 from "./components/Header1";
+import ManagePetDetails from "./pages/ManagePetDetails";
 type State = {
   isAdmin: boolean;
   User: IUser | undefined;
@@ -178,6 +179,7 @@ function App() {
       <Route path="/check-out" element={<CheckOut />} />
       <Route path="/test" element={<FirebaseImageUpload />} />
       <Route path="/products/:productId" element={<PetsDetails />} />
+      <Route path="/manage-pet/:productId" element={<ManagePetDetails />} />
       <Route path="/manage-pets" element={<ManagingPets />} />
     </Routes>
   );

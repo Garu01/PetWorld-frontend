@@ -52,32 +52,6 @@ class AuthService {
     });
   }
 
-  updateInfo(
-    email: string,
-    first_name: string,
-    last_name: string,
-    phone_number: string,
-    address_line1: string,
-    address_line2: string,
-    city: string,
-    state_province: string,
-    country: string,
-    postcode: string
-  ) {
-    return axios.post(API_URL + "updateInfo", {
-      email,
-      first_name,
-      last_name,
-      phone_number,
-      address_line1,
-      address_line2,
-      city,
-      state_province,
-      country,
-      postcode,
-    });
-  }
-
   // get user information from local storage
   getCurrentUser() {
     const userStr = localStorage.getItem("user");

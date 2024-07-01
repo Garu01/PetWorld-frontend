@@ -1,12 +1,78 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import UserRow from "../components/UserRow";
 import FrameComponent2 from "../components/FrameComponent2";
 import "./PaymentMethod.css";
+import FrameComponent from "../components/FrameComponent";
+import { useNavigate } from "react-router-dom";
+import { useShoppingContext } from "../context/shoppingContext";
+import { formatCurrency } from "../util/common/formatCurrency";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import authService from "../services/auth.service";
+import CustomerDetails from "../components/CustomerDetails";
+import { dividerClasses } from "@mui/material";
 
+interface User {
+  email: string;
+  first_name: string;
+  last_name: string;
+  address_line1: string;
+  address_line2: string;
+  postcode: string;
+  phone_number: string;
+  city: string;
+  state_province: string;
+  country: string;
+}
 const PaymentMethod: FunctionComponent = () => {
+  const [users, setUsers] = useState<User>();
+  const [error, setError] = useState("");
+  const [successful, setSuccessful] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        // Retrieve the stored user data from local storage
+        const storedUserData = localStorage.getItem("user");
+        if (!storedUserData) {
+          setError("No user data found in local storage");
+          return;
+        }
+
+        const parsedUserData = JSON.parse(storedUserData);
+        if (!parsedUserData || !parsedUserData.email) {
+          setError("Stored user data is invalid");
+          return;
+        }
+
+        const storedEmail = parsedUserData.email;
+
+        // Fetch users from the database
+        const response = await axios.get("http://localhost:8080/users"); // Replace with your actual API endpoint
+        const response_users = response.data;
+
+        // Find the user with the matching email
+        const matchedUser = response_users.find(
+          (user: any) => user.email === storedEmail
+        );
+        if (matchedUser) {
+          setUsers(matchedUser);
+        } else {
+          setError("No matching user found in the database");
+        }
+      } catch (error) {
+        setError("Error fetching user data");
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   return (
-    <div className="payment-method">
-      <header className="header4">
+    <div>
+      <div className="payment-method">
+        {/* <header className="header4">
         <div className="pawprint-1-wrapper1">
           <img
             className="pawprint-1-icon4"
@@ -72,13 +138,13 @@ const PaymentMethod: FunctionComponent = () => {
             <b className="cart4">Cart</b>
           </div>
         </div>
-      </header>
-      <main className="frame-main">
-        <div className="frame-parent1">
-          <UserRow userRowPadding="0px var(--padding-base) 0px var(--padding-lg)" />
-          <FrameComponent2 />
-        </div>
-        <section className="frame-wrapper">
+      </header> */}
+        <main className="frame-main">
+          <div className="frame-parent1">
+            <UserRow userRowPadding="0px var(--padding-base) 0px var(--padding-lg)" />
+            <FrameComponent />
+          </div>
+          {/* <section className="frame-wrapper">
           <div className="frame-parent2">
             <div className="payment-method-wrapper">
               <h1 className="payment-method1">Payment Method</h1>
@@ -293,8 +359,22 @@ const PaymentMethod: FunctionComponent = () => {
               </div>
             </div>
           </div>
-        </section>
-      </main>
+        </section> */}
+        </main>
+
+        {users && (
+          <CustomerDetails
+            first_name={users.first_name}
+            last_name={users.last_name}
+            email={users.email}
+            phone_number={users.phone_number}
+            city={users.city}
+            country={users.country}
+            postcode={users.postcode}
+            address={users.address_line1}
+          />
+        )}
+      </div>
     </div>
   );
 };

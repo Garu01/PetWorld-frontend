@@ -2,7 +2,6 @@ import { FunctionComponent, useEffect, useState, ChangeEvent } from "react";
 import Header2 from "../components/Header2";
 import FrameComponent1 from "../components/FrameComponent1";
 import Dog from "../components/Dog";
-import EndPage1 from "../components/EndPage1";
 import "./DogPage.css";
 import axios from "axios";
 import AuthService from "../services/auth.service";
@@ -201,7 +200,6 @@ const BirdPage: FunctionComponent = () => {
           </div>
         </div>
       </section>
-      <EndPage1 />
     </div>
   );
 };

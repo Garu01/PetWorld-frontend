@@ -6,6 +6,7 @@ import {
 } from "react";
 import "./FrameComponent.css";
 import { useNavigate } from "react-router-dom";
+import AuthService from "../services/auth.service";
 export type FrameComponentType = {
   className?: string;
 
@@ -13,15 +14,11 @@ export type FrameComponentType = {
   headerNavigationMargin?: CSSProperties["margin"];
 
   /** Action props */
-  onNavigationLinksContainerClick?: () => void;
-  onNavigationLinksContainerClick1?: () => void;
 };
 
 const FrameComponent: FunctionComponent<FrameComponentType> = ({
   className = "",
   headerNavigationMargin,
-  onNavigationLinksContainerClick,
-  onNavigationLinksContainerClick1,
 }) => {
   const petWorldStyle: CSSProperties = useMemo(() => {
     return {
@@ -35,12 +32,21 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
     navigate("/my-profile-page");
   }, [navigate]);
 
-  const onCartButtonContainerClick = useCallback(() => {
-    navigate("/cart-view");
+  const onOrderClick = useCallback(() => {
+    navigate("/check-out");
   }, [navigate]);
 
-  const onAboutUsClick = useCallback(() => {
-    navigate("/about-us-page");
+  const onPaymentMethodClick = useCallback(() => {
+    navigate("/payment-method");
+  }, [navigate]);
+
+  const onManagePetClick = useCallback(() => {
+    navigate("/manage-pets");
+  }, [navigate]);
+
+  const onLogoutClick = useCallback(() => {
+    navigate("/");
+    AuthService.logout();
   }, [navigate]);
 
   return (
@@ -55,7 +61,9 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
               src="/profile-1@2x.png"
             />
           </div>
-          <div className="my-profile4">My Profile</div>
+          <div className="my-profile4" onClick={onMyProfileClick}>
+            My Profile
+          </div>
         </div>
       </div>
       <div className="user-actions1">
@@ -69,7 +77,9 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
                 src="/package-1@2x.png"
               />
             </div>
-            <div className="your-orders">Your orders</div>
+            <div className="your-orders" onClick={onOrderClick}>
+              Your orders
+            </div>
           </div>
         </div>
         <div className="order-address1">
@@ -97,7 +107,9 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
                     src="/creditcard-1@2x.png"
                   />
                 </div>
-                <div className="payment-methods">Payment Methods</div>
+                <div className="payment-methods" onClick={onPaymentMethodClick}>
+                  Payment Methods
+                </div>
               </div>
             </div>
             <div className="manage-pets">
@@ -111,16 +123,18 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
                     src="/pawprint-2@2x.png"
                   />
                 </div>
-                <div className="manage-pets1">Manage Pets</div>
+                <div className="manage-pets1" onClick={onManagePetClick}>
+                  Manage Pets
+                </div>
               </div>
             </div>
           </div>
           <div className="logout-container-wrapper">
             <div className="logout-container">
-              <div className="logout-link">
-                <input className="logout-1" type="checkbox" />
+              <div className="logout-link"></div>
+              <div className="logout" onClick={onLogoutClick}>
+                Logout
               </div>
-              <div className="logout">Logout</div>
             </div>
           </div>
         </div>
