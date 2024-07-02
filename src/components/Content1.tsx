@@ -13,6 +13,12 @@ export type Content1Type = {
   date_of_birth: string;
   first_name: string;
   user_id: number;
+  microchiped: string;
+  vaccinated: string;
+  wormed_flead: string;
+  health_checked: string;
+  advertisement_type: string;
+  contact_preference: string;
 };
 
 type ProductItem = {
@@ -37,6 +43,12 @@ const Content1: FunctionComponent<Content1Type> = ({
   date_of_birth,
   first_name,
   user_id,
+  microchiped,
+  vaccinated,
+  wormed_flead,
+  health_checked,
+  advertisement_type,
+  contact_preference,
 }) => {
   const productItem = {
     id: id,
@@ -81,18 +93,22 @@ const Content1: FunctionComponent<Content1Type> = ({
                     <div className="pet-color-mix-colours-adverti-wrapper">
                       <div className="pet-color-mix-container">
                         <p className="pet-color-mix">Pet color: {color}</p>
-                        {/* <p className="advertiser-individual">
-                          Advertiser: Individual
+                        <p className="advertiser-individual">
+                          Health Check :{health_checked}
                         </p>
-                        <p className="seller-id-at13">Seller ID: #AT13</p>
-                        <p className="pets-in-litter">
-                          Pets in Litter: 3 Male / 3 Female
-                        </p> */}
+                        <p className="seller-id-at13">
+                          Microchiped :{microchiped} Wormed Flead :{" "}
+                          {wormed_flead}
+                        </p>
+                        <p className="pets-in-litter">Vaccine : {vaccinated}</p>
 
                         <p className="dob-07-01-2023">DOB:{date_of_birth}</p>
                       </div>
                     </div>
-                    <div className="description">Description</div>
+
+                    <div className="description">
+                      Description : <br /> {advertisement_type}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -120,7 +136,7 @@ const Content1: FunctionComponent<Content1Type> = ({
             </div>
             <div className="additional-info">
               <div className="separator1" />
-              <div className="description1">Description</div>
+              <div className="description1">{contact_preference}</div>
             </div>
           </div>
         </div>

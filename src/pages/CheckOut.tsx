@@ -25,6 +25,7 @@ type Item = {
   id: number;
   qty: number;
   user_id: number;
+  price: number;
 };
 const CheckOut: FunctionComponent = () => {
   const [users, setUsers] = useState<User>();
@@ -88,10 +89,19 @@ const CheckOut: FunctionComponent = () => {
       qty: item.qty,
       user_id: item.user_id,
     }));
+    const totalPrice = currentShoppingCart.reduce(
+      (total: number, item: Item) => total + item.qty * item.price,
+      0
+    );
     console.log(extractedData);
+    const result = {
+      extractedData,
+      totalPrice,
+    };
     axios
       .post("http://localhost:8080/api/transaction", {
         extractedData,
+        totalPrice,
       })
       .then(
         (response) => {

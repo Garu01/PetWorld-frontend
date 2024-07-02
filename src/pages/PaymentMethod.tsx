@@ -357,7 +357,7 @@ const PaymentMethod: FunctionComponent = () => {
           {/* {users && (
           <CustomerDetails
             first_name={users.first_name}
-            last_name={users.last_name}
+    i        last_name={users.last_name}
             email={users.email}
             phone_number={users.phone_number}
             city={users.city}

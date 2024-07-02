@@ -195,6 +195,7 @@ const UploadPets: FunctionComponent = () => {
         </div>
         {/* <CreateAccount1 /> */}
 
+        {/* Using Form and Formik to get data from user */}
         <Formik
           initialValues={initialValues}
           //validationSchema={validationSchema}

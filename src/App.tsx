@@ -47,19 +47,6 @@ function App() {
   const pathname = location.pathname;
 
   const currentUser = AuthService.getCurrentUser();
-  // if (currentUser) {
-  //   setUser({
-  //     isAdmin: currentUser.roles.includes("ROLE_ADMIN"),
-  //     User: currentUser,
-  //   });
-  // }
-
-  // if (currentUser !== undefined) {
-  //   setUser(true);
-  //   currentUser.roles.includes("ROLE_ADMIN")
-  //     ? setAdmin(true)
-  //     : setAdmin(false);
-  // }
   useEffect(() => {
     if (action !== "POP") {
       window.scrollTo(0, 0);
@@ -147,6 +134,7 @@ function App() {
     }
   }, [pathname]);
 
+  // Set up route for website
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -154,33 +142,10 @@ function App() {
       <Route path="/login-register-page" element={<LoginRegisterPage />} />
       <Route path="/create-new-account" element={<CreateNewAccount />} />
 
-      {/* <Route
-        path="/staff-ui-for-confirm-seller-pets"
-        element={<StaffUIForConfirmSellerPe />}
-      /> */}
-      {/* <Route
-          path="/staff-ui-for-confirm-seller-pets"
-          element={
-            <ProtectedRoute
-              isAdmin={
-                (user.isAdmin = currentUser.roles.includes("ROLE_ADMIN"))
-              }
-            >
-              <StaffUIForConfirmSellerPe />
-            </ProtectedRoute>
-          }
-        /> */}
-
       <Route
         path="/staff-ui-for-confirm-seller-pets"
         element={<AdminRoute element={<StaffUIForConfirmSellerPe />} />}
       />
-      {/* <Route
-        path="/staff-ui-for-confirm-seller-pets"
-        element={
-          <ProtectedRoute roles={["ROLE_ADMIN"]} element={<ManagingPets />} />
-        }
-      /> */}
 
       <Route
         path="/user-main-page"

@@ -18,6 +18,12 @@ interface Pet {
   color: string;
   date_of_birth: string;
   first_name: string;
+  microchiped: string;
+  vaccinated: string;
+  wormed_flead: string;
+  health_checked: string;
+  advertisement_type: string;
+  contact_preference: string;
 }
 
 const PetsDetails: FunctionComponent = () => {
@@ -143,6 +149,12 @@ const PetsDetails: FunctionComponent = () => {
           date_of_birth={pet.date_of_birth}
           first_name={pet.first_name}
           user_id={pet.user_id}
+          microchiped={pet.microchiped}
+          vaccinated={pet.vaccinated}
+          wormed_flead={pet.wormed_flead}
+          health_checked={pet.health_checked}
+          advertisement_type={pet.advertisement_type}
+          contact_preference={pet.contact_preference}
         />
       )}
     </div>
