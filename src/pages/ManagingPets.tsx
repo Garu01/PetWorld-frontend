@@ -20,6 +20,7 @@ interface Pet {
   color: string;
   available: string;
   createAt: string;
+  admin_checked: string;
 }
 
 type PetRemove = {
@@ -34,6 +35,8 @@ const ManagingPets: FunctionComponent = () => {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
   const [removeCheck, setRemoveCheck] = useState<PetRemove[]>([]);
+
+  // get pet data
   useEffect(() => {
     const fetchPets = async () => {
       try {
@@ -41,7 +44,9 @@ const ManagingPets: FunctionComponent = () => {
           "http://localhost:8080/api/showPet"
         );
         const responsePet = response.data.filter(
-          (pet) => pet.user_id === currentUser.id
+          (pet) =>
+            pet.user_id === currentUser.id &&
+            pet.available.toLowerCase() === "true"
         );
 
         setPets(responsePet || null);
@@ -56,6 +61,7 @@ const ManagingPets: FunctionComponent = () => {
     fetchPets();
   }, []);
 
+  // create a table to show data in UI
   const columns: ColumnsType<Pet> = [
     {
       title: "Seller Name",
@@ -81,9 +87,9 @@ const ManagingPets: FunctionComponent = () => {
       key: "title",
     },
     {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
+      title: "Admin Approved",
+      dataIndex: "admin_checked",
+      key: "admin_checked",
     },
     {
       title: "Price",
@@ -106,13 +112,13 @@ const ManagingPets: FunctionComponent = () => {
           // }
           className={record.available ? "btn btn-success" : "btn btn-secondary"}
         >
-          {record.available ? "Available" : "edit"}
+          Edit
         </Link>
       ),
     },
     {
-      title: "Actions",
-      key: "actions",
+      title: "Remove",
+      key: "Remove",
       render: (text, record) => (
         <input
           onClick={(e) =>

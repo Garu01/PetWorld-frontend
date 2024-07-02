@@ -82,6 +82,7 @@ const CheckOut: FunctionComponent = () => {
     fetchUser();
   }, []);
 
+  // get item shopping_cart that stored in localstorage and send to server
   const handlePlaceOrder = () => {
     const currentShoppingCart = authService.getCurrentShoppingCart();
     const extractedData = currentShoppingCart.map((item: Item) => ({

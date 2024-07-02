@@ -231,8 +231,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="col-md-4 mb-3"
-                    style={{ marginLeft: "200px", marginTop: "20px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <label htmlFor="pet_breed">Pet Breed</label>
                     <Field
@@ -244,8 +244,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="col-md-4 mb-3"
-                    style={{ marginLeft: "200px", marginBottom: "20px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <label htmlFor="pet_title">Pet title </label>
                     <Field
@@ -262,8 +262,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <label htmlFor="pet_color">Pet Color</label>
                     <Field
@@ -280,8 +280,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <label htmlFor="location">Location </label>
                     <Field
@@ -293,8 +293,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <label htmlFor="price">Price </label>
                     <Field
@@ -306,8 +306,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <label htmlFor="advertisement_type">
                       Advertisement Type{" "}
@@ -321,8 +321,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <label htmlFor="date_of_birth">Date of Birth </label>
                     <Field
@@ -334,8 +334,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <label htmlFor="contact_preference">
                       Contact Preference{" "}
@@ -349,21 +349,21 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <label htmlFor="weight">Weight </label>
                     <Field
                       name="weight"
-                      type="number"
+                      type="text"
                       className="form-control"
                       placeholder=" weight"
                     />
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <label htmlFor="sex">Sex </label>
                     <div role="group" aria-labelledby="my-radio-group"></div>
@@ -378,8 +378,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px" }}
                   >
                     <label htmlFor="image">Image </label>
                     <input
@@ -410,8 +410,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px", marginTop: "15px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <div id="my-radio-group">Microchiped</div>
                     <div role="group" aria-labelledby="my-radio-group">
@@ -427,8 +427,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px", marginTop: "15px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <div id="my-radio-group">Vaccinated</div>
                     <div role="group" aria-labelledby="my-radio-group">
@@ -453,8 +453,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px", marginTop: "15px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <div id="my-radio-group">Wormed flead</div>
                     <div role="group" aria-labelledby="my-radio-group">
@@ -470,8 +470,8 @@ const UploadPets: FunctionComponent = () => {
                   </div>
 
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginLeft: "200px", marginTop: "15px" }}
+                    className="confirm-email-input"
+                    style={{ marginLeft: "50px", marginTop: "15px" }}
                   >
                     <div id="my-radio-group">Health Check</div>
                     <div role="group" aria-labelledby="my-radio-group">

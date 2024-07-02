@@ -40,6 +40,7 @@ const MyProfilePage: FunctionComponent = () => {
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   const updateUserField = (field: keyof User, value: any) => {
     if (users) {
@@ -164,7 +165,9 @@ const MyProfilePage: FunctionComponent = () => {
           setError("Stored user data is invalid");
           return;
         }
-
+        parsedUserData.roles.includes("ROLE_ADMIN")
+          ? setAdmin(true)
+          : setAdmin(false);
         const storedEmail = parsedUserData.id;
 
         // Fetch users from the database
@@ -197,7 +200,7 @@ const MyProfilePage: FunctionComponent = () => {
         <div className="user-dropdown">
           <div className="dropdown-items">
             <UserRow />
-            <FrameComponent />
+            <FrameComponent isAdmin={admin} />
           </div>
         </div>
         <Formik

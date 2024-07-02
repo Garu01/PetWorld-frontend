@@ -20,6 +20,7 @@ type ProductItem = {
   user_id: number;
   price: number;
   admin_checked: string;
+  available: string;
 };
 const CatPage: FunctionComponent = () => {
   const { addCartItem } = useShoppingContext();
@@ -86,7 +87,8 @@ const CatPage: FunctionComponent = () => {
         const response_pet = response.data.filter(
           (pet: ProductItem) =>
             pet.type.toLowerCase() === "cat" &&
-            pet.admin_checked.toLowerCase() === "true"
+            pet.admin_checked.toLowerCase() === "true" &&
+            pet.available.toLowerCase() === "true"
         );
 
         if (condition === "lowToHigh" || condition === "highToLow") {

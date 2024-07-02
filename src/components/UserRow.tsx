@@ -1,13 +1,14 @@
 import { FunctionComponent, useMemo, type CSSProperties } from "react";
 import "./UserRow.css";
-
+import { useState, useEffect } from "react";
+import AuthService from "../services/auth.service";
 export type UserRowType = {
   className?: string;
-
+  first_name?: string;
   /** Style props */
   userRowPadding?: CSSProperties["padding"];
 };
-
+import axios from "axios";
 const UserRow: FunctionComponent<UserRowType> = ({
   className = "",
   userRowPadding,
@@ -29,7 +30,7 @@ const UserRow: FunctionComponent<UserRowType> = ({
             src="/user-1@2x.png"
           />
         </div>
-        <h3 className="user-name2">Jack</h3>
+        <h3 className="user-name2"></h3>
       </div>
     </div>
   );

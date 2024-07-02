@@ -18,6 +18,7 @@ type ProductItem = {
   user_id: number;
   price: number;
   admin_checked: string;
+  available: string;
 };
 const BirdPage: FunctionComponent = () => {
   const { addCartItem } = useShoppingContext();
@@ -75,18 +76,24 @@ const BirdPage: FunctionComponent = () => {
   //   fetchUser();
   // }, []);
 
+  // useEffect : this function will re-render when re load website
   useEffect(() => {
     const fetchPets = async () => {
+      // use http method get to get data from server
       try {
         const response = await axios.get<ProductItem[]>(
           "http://localhost:8080/api/showPet"
         );
+        // only take data type = bird, admin checked and is available
         const response_pet = response.data.filter(
           (pet: ProductItem) =>
             pet.type.toLowerCase() === "bird" &&
-            pet.admin_checked.toLowerCase() === "true"
+            pet.admin_checked.toLowerCase() === "true" &&
+            pet.available.toLowerCase() === "true"
         );
 
+        // use for sort function
+        // price :
         if (condition === "lowToHigh" || condition === "highToLow") {
           response_pet.sort((a, b) => {
             return condition === "lowToHigh"
@@ -94,11 +101,13 @@ const BirdPage: FunctionComponent = () => {
               : b.price - a.price;
           });
         }
+        // latest/oldest pet (base on id pet on database)
         if (condition === "latest" || condition === "oldest") {
           response_pet.sort((a, b) => {
             return condition === "latest" ? b.id - a.id : a.id - b.id;
           });
         }
+        // alphabet : a to z or z to a
         if (condition === "atoz" || condition === "ztoa") {
           response_pet.sort((a, b) => {
             return condition === "atoz"
@@ -122,22 +131,22 @@ const BirdPage: FunctionComponent = () => {
     fetchPets();
   }, [condition]);
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    const reader = new FileReader();
+  // const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   const reader = new FileReader();
 
-    reader.onloadend = () => {
-      const base64String = reader.result?.toString().split(",")[1];
-      if (base64String) {
-        setBase64Image(base64String);
-        setImage(reader.result?.toString() || null);
-      }
-    };
+  //   reader.onloadend = () => {
+  //     const base64String = reader.result?.toString().split(",")[1];
+  //     if (base64String) {
+  //       setBase64Image(base64String);
+  //       setImage(reader.result?.toString() || null);
+  //     }
+  //   };
 
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
+  //   if (file) {
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   const handleConditionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCondition(e.target.value);

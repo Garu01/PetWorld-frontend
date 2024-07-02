@@ -120,9 +120,9 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
       key: "price",
     },
     {
-      title: "Check Available",
-      dataIndex: "available",
-      key: "available",
+      title: "Approve",
+      dataIndex: "Approve",
+      key: "Approve",
       render: (text, record) => (
         <input
           onClick={(e) =>
@@ -139,8 +139,8 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
       ),
     },
     {
-      title: "Actions",
-      key: "actions",
+      title: "Reject",
+      key: "Reject",
       render: (text, record) => (
         <input
           onClick={(e) =>
@@ -155,6 +155,7 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
     },
   ];
 
+  // function to add selected pet to be checked by admin ( this structure used for check box )
   const handleCheckAvailable = (id: number, available: string) => {
     setAvailableCheck((prev) => {
       const exists = prev.find((item) => item.id === id);
@@ -164,11 +165,10 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
         return [...prev, { id, available }];
       }
     });
-    console.log(removeCheck);
   };
 
+  // send checked data to sv to update
   const handleSubmitAvailable = () => {
-    console.log(availableCheck);
     axios
       .post("http://localhost:8080/api/adminCheck", {
         availableCheck,
@@ -194,6 +194,8 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
   // const handleRemove = (id: number, remove: string) => {
   //   setRemoveCheck([...removeCheck, { id, remove: remove }]);
   // };
+
+  // function to add selected pet to removed ( this structure used for check box )
   const handleRemove = (id: number, remove: string) => {
     setRemoveCheck((prev) => {
       const exists = prev.find((item) => item.id === id);
@@ -206,6 +208,7 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
     console.log(removeCheck);
   };
 
+  // send list of pet in removeCheck to sv to remove from database
   const handleSubmitRemove = () => {
     console.log(removeCheck);
     axios
@@ -454,7 +457,7 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
         className="btn btn-primary"
         type="submit"
       >
-        Update available
+        Approved
       </button>
 
       <button
@@ -463,7 +466,7 @@ const StaffUIForConfirmSellerPe: FunctionComponent = () => {
         type="submit"
         style={{ marginLeft: "50px" }}
       >
-        Remove
+        Reject
       </button>
       {message && (
         <div

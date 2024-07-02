@@ -44,6 +44,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
     postcode: "",
   };
 
+  // create condition when filling the form
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("This is not a valid email.")
@@ -58,6 +59,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
       .required("This field is required!"),
   });
 
+  // function for post data to sv when finish the form
   const handleRegister = (formValue: {
     email: string;
     password: string;
@@ -121,6 +123,7 @@ const CreateAccount: FunctionComponent<CreateAccountType> = ({
 
   return (
     <div className={`create-account1 ${className}`}>
+      {/* Using Formik and Form to collect form data */}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

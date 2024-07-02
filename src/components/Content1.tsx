@@ -97,8 +97,8 @@ const Content1: FunctionComponent<Content1Type> = ({
                           Health Check :{health_checked}
                         </p>
                         <p className="seller-id-at13">
-                          Microchiped :{microchiped} Wormed Flead :{" "}
-                          {wormed_flead}
+                          Microchiped :{microchiped} <br />
+                          Wormed Flead :{wormed_flead}
                         </p>
                         <p className="pets-in-litter">Vaccine : {vaccinated}</p>
 

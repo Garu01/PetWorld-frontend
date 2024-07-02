@@ -52,6 +52,7 @@ const UploadPets: FunctionComponent = () => {
   const currentUser = AuthService.getCurrentUser();
   const [pet, setPet] = useState<Pet | null>(null);
 
+  // get pet data from sv
   useEffect(() => {
     const fetchPets = async () => {
       if (productId === undefined) {
@@ -87,6 +88,7 @@ const UploadPets: FunctionComponent = () => {
 
     fetchPets();
   }, [productId]);
+
   // initialize value
   const initialValues = pet
     ? {
@@ -220,20 +222,20 @@ const UploadPets: FunctionComponent = () => {
   };
 
   const [preview, setPreview] = useState("");
-  const handleImageChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void
-  ) => {
-    const file = event.currentTarget.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string);
-        setFieldValue("image", file);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleImageChange = (
+  //   event: React.ChangeEvent<HTMLInputElement>,
+  //   setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void
+  // ) => {
+  //   const file = event.currentTarget.files?.[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setPreview(reader.result as string);
+  //       setFieldValue("image", file);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   // const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
   //   const file = event.target.files?.[0];

@@ -3,13 +3,15 @@ import {
   useMemo,
   type CSSProperties,
   useCallback,
+  useState,
+  useEffect,
 } from "react";
 import "./FrameComponent.css";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 export type FrameComponentType = {
   className?: string;
-
+  isAdmin?: boolean;
   /** Style props */
   headerNavigationMargin?: CSSProperties["margin"];
 
@@ -18,6 +20,7 @@ export type FrameComponentType = {
 
 const FrameComponent: FunctionComponent<FrameComponentType> = ({
   className = "",
+  isAdmin,
   headerNavigationMargin,
 }) => {
   const petWorldStyle: CSSProperties = useMemo(() => {
@@ -53,6 +56,10 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
     navigate("/upload-pets");
   }, [navigate]);
 
+  const onAdminClick = useCallback(() => {
+    navigate("/staff-ui-for-confirm-seller-pets");
+  }, [navigate]);
+
   return (
     <div className={`profile-link-container-parent ${className}`}>
       <div className="profile-link-container">
@@ -68,6 +75,21 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
           <div className="my-profile4" onClick={onMyProfileClick}>
             My Profile
           </div>
+          {isAdmin && (
+            <div>
+              <div className="profile-1-wrapper">
+                <img
+                  className="profile-1-icon2"
+                  loading="lazy"
+                  alt=""
+                  src="/profile-1@2x.png"
+                />
+              </div>
+              <div className="my-profile4" onClick={onAdminClick}>
+                Admin
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="user-actions1">

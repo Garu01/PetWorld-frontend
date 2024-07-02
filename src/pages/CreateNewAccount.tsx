@@ -8,6 +8,7 @@ import Header2 from "../components/Header2";
 const CreateNewAccount: FunctionComponent = () => {
   return (
     <div className="create-new-account">
+      {/*  GO TO CreateAccount component */}
       <CreateAccount />
       <b className="create-account">Create Account</b>
       {/* <Header2 />
